@@ -6,7 +6,7 @@
 /*   By: kelmouto <kelmouto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 05:04:22 by ybouzafo          #+#    #+#             */
-/*   Updated: 2023/06/10 14:42:25 by kelmouto         ###   ########.fr       */
+/*   Updated: 2023/06/10 18:32:59 by kelmouto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -245,13 +245,17 @@ int	cd_builtin(t_pars *pars, t_exp *data, int x);
 /*---------------------------------expand before split --------------------------------*/
 int	find_redir(char *p, int j);
 char	*expand_str(char *p, t_exp *data);
-char	*str_join1(char *v, char *f, char *p);
-char	*str_join2(char *p,char *t, char *f);
-void	free_str(char *p, char *f, char *t, char *v);
 int	is_alph_num(char c);
 char	*expand_func(char *s, int *j, t_exp *data);
 char	**func_expand(char **a, t_exp *data);
 int	ft_ls_size(t_exp *p);
 void squipe(char c, char *s, int *i);
+void	add_many_chars(char **s, char *st);
+void 	add_filename(char **s,char *a , int *i);
+int	ft_isspace(char c);
+void	squipe_pro(char *s,char **st,int *i, t_exp *data);
+char	*expand_file(char *a, t_exp *data);
+int check_ambiguous(char *s);
+int	compter_mots(char const *s, char c);
 
 #endif

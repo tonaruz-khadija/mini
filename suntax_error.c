@@ -6,7 +6,7 @@
 /*   By: kelmouto <kelmouto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 20:54:23 by ybouzafo          #+#    #+#             */
-/*   Updated: 2023/06/09 18:24:56 by kelmouto         ###   ########.fr       */
+/*   Updated: 2023/06/10 17:09:27 by kelmouto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,8 +113,8 @@ int	check_ozel_char(char *str)
 		i++;
 	while (str[i])
 	{
-		if(str[i] == '\'' || str[i] == '"')
-			squipe(str[i],str,&i);
+		// if(str[i] == '\'' || str[i] == '"')
+		// 	squipe(str[i],str,&i);
 		if (str[i] == '<' && str[i + 1] == '>')
 			return (ft_perror());
 		if (str[i] == '>' && str[i + 1] == '<')

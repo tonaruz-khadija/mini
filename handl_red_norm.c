@@ -6,7 +6,7 @@
 /*   By: kelmouto <kelmouto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 09:20:40 by ybouzafo          #+#    #+#             */
-/*   Updated: 2023/06/09 18:33:57 by kelmouto         ###   ########.fr       */
+/*   Updated: 2023/06/10 18:46:11 by kelmouto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,25 +68,7 @@ void	handle_append_output_redirect(t_pars *pars, t_exp *data, int i)
 	}
 }
 
-void	ft_add_cmds(char *s, char ***cmds)
-{
-	char	**cmd;
-	int		x;
 
-	x = 0;
-	while ((*cmds) && (*cmds)[x])
-		x++;
-	cmd = malloc(sizeof(char *) * (x + 2));
-	x = 0;
-	while (*cmds && (*cmds)[x])
-	{
-		cmd[x] = (*cmds)[x];
-		x++;
-	}
-	cmd[x++] = s;
-	cmd[x] = 0;
-	*cmds = cmd;
-}
 
 void	handl_redirec(t_pars *pars, t_exp *data)
 {

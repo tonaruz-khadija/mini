@@ -6,7 +6,7 @@
 /*   By: kelmouto <kelmouto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 13:39:10 by kelmouto          #+#    #+#             */
-/*   Updated: 2023/06/06 13:48:57 by kelmouto         ###   ########.fr       */
+/*   Updated: 2023/06/10 17:16:52 by kelmouto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	is_alph_digit(char c)
 {
-	if ((c >= '0' && c <= '9') || ((c >= 'a' && c <= 'z')) || ((c >= 'A'
+	if (((c >= 'a' && c <= 'z')) || ((c >= 'A'
 				&& c <= 'Z')) || (c == '\'') || (c == '"'))
 		return (1);
 	return (0);
@@ -71,5 +71,6 @@ int	err_exp(char *s)
 void	perror_exp(void)
 {
 	printf("minishell: export: `syntax': not a valid identifier\n");
+	g_exit_status = 1;
 	return ;
 }

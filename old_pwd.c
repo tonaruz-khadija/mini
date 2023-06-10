@@ -1,50 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handl_quotes.c                                     :+:      :+:    :+:   */
+/*   old_pwd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kelmouto <kelmouto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/13 20:50:27 by ybouzafo          #+#    #+#             */
-/*   Updated: 2023/06/10 15:45:38 by kelmouto         ###   ########.fr       */
+/*   Created: 2023/06/10 16:58:44 by kelmouto          #+#    #+#             */
+/*   Updated: 2023/06/10 17:00:23 by kelmouto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	nmbr_quotes(char *str)
+int	old_var(t_exp *data)
 {
-	int	i;
-	char c;
-
-	i = 0;
-	while(str[i])
+	while (data)
 	{
-		if(str[i] == '"' || str[i] == '\'')
+		if (strcmp(data->key, "OLDPWD=") == 0)
 		{
-			c =  str[i++];
-			while(str[i] != c && str[i])
-				i++;
-			if(!str[i])
-				return(1);
+			if (data->value)
+				return (1);
 		}
-		i++;
+		data = data->next;
 	}
 	return (0);
 }
 
-int	y_a_quotes(char *str)
+void	ajout_oldpwd(t_exp *data, char *st)
 {
-	int	i;
+	t_exp *tmp2;
 
-	i = 0;
-	while (str[i])
+	if (old_var(data) == 1)
+		return ;
+
+	tmp2 = data;
+	while (data)
 	{
-		if (str[i] == '"' || str[i] == '\'')
+		if (!ft_strcmp(data->key, "OLDPWD="))
 		{
-			return (1);
+			data->value = st;
 		}
-		i++;
+		data = data->next;
 	}
-	return (0);
+	data = tmp2;
 }

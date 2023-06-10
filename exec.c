@@ -6,49 +6,13 @@
 /*   By: kelmouto <kelmouto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 10:14:55 by ybouzafo          #+#    #+#             */
-/*   Updated: 2023/06/09 18:37:43 by kelmouto         ###   ########.fr       */
+/*   Updated: 2023/06/10 18:51:34 by kelmouto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	old_var(t_exp *data)
-{
-	while (data)
-	{
-		if (strcmp(data->key, "OLDPWD=") == 0)
-		{
-			if (data->value)
-				return (1);
-		}
-		data = data->next;
-	}
-	return (0);
-}
 
-void	ajout_oldpwd(t_exp *data, char *st)
-{
-	t_exp	*na;
-	t_exp	*next;
-
-	if (old_var(data) == 1)
-		return ;
-	na = (t_exp *)malloc(sizeof(t_exp));
-	na->key = "OLDPWD=";
-	na->value = st;
-	na->next = NULL;
-	while (data)
-	{
-		if (strcmp(data->key, "PWD=") == 0)
-		{
-			next = data->next;
-			data->next = na;
-			na->next = next;
-			break ;
-		}
-		data = data->next;
-	}
-}
 int	check_if_builtin(t_pars *pars, t_exp *data, int x)
 {
 	

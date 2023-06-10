@@ -6,7 +6,7 @@
 /*   By: kelmouto <kelmouto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 11:33:17 by kelmouto          #+#    #+#             */
-/*   Updated: 2023/06/10 14:03:34 by kelmouto         ###   ########.fr       */
+/*   Updated: 2023/06/10 18:32:51 by kelmouto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,47 @@ void	ft_add_to_pars(t_pars **a, t_pars *new)
 		t->next = new;
 	}
 }
+ int	compter_mots(char const *s, char c)
+{
+	int		i;
+	int		n;
+	char	*str;
+
+	i = 0;
+	n = 0;
+	str = (char *)s;
+	while (*str)
+	{
+		if (*str != c && n == 0)
+		{
+			n = 1;
+			i++;
+		}
+		else if (*str == c)
+			n = 0;
+		str++;
+	}
+	return (i);
+}
+
+char	*expand_file(char *a, t_exp *data)
+{
+	char *s = NULL;
+	int i;
+	i = 0;
+	while(a[i])
+	{
+		if(a[i] == '"' || a[i] == '\'')
+				squipe_pro(a, &s, &i,data);
+		else if (a[i] == '$')
+				add_many_chars(&s, expand_func(a, &i, data));
+		else
+				add_char(&s, a[i]);
+		i++;
+	}
+	return (s);
+}
+
 
 void	parsing(t_pars *pars, t_exp *data)
 {
@@ -55,11 +96,6 @@ void	parsing(t_pars *pars, t_exp *data)
 	check_symbole(pars);
 	a = my_split(pars->cmd, '|');
 	a = func_expand(a, data);
-	while(*a)
-	{
-		printf(" a : %s\n", *a);
-		a++;
-	}
 	pars = NULL;
 	while (*a)
 	{
@@ -75,4 +111,3 @@ void	parsing(t_pars *pars, t_exp *data)
 	handl_redirec(pars, data);
 	execution(pars, data);
 }
-//ls |  cat main.c |  grep a > $a
