@@ -6,7 +6,7 @@
 /*   By: kelmouto <kelmouto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 16:08:22 by kelmouto          #+#    #+#             */
-/*   Updated: 2023/06/09 20:55:28 by kelmouto         ###   ########.fr       */
+/*   Updated: 2023/06/10 15:43:53 by kelmouto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,14 +83,13 @@ void	min_get_exp(t_exp *tmp, t_pars *pars, char *ptr)
 	}
 }
 
-void	get_export(t_pars *pars, t_exp **data, char *ptr)
+void	get_export(t_pars *pars, t_exp **data, char *p)
 {
 	t_exp	*tmp;
 	char	*p;
 
 	if (ptr[0] == '=')
 		perror_exp();
-	p = skip_quot_exp(ptr);
 	if (err_exp(p))
 		perror_exp();
 	if (check_export(data, pars, p))
