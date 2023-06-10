@@ -6,7 +6,7 @@
 /*   By: kelmouto <kelmouto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 16:08:22 by kelmouto          #+#    #+#             */
-/*   Updated: 2023/06/10 15:43:53 by kelmouto         ###   ########.fr       */
+/*   Updated: 2023/06/10 15:44:34 by kelmouto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	get_export(t_pars *pars, t_exp **data, char *p)
 	t_exp	*tmp;
 	char	*p;
 
-	if (ptr[0] == '=')
+	if (p[0] == '=')
 		perror_exp();
 	if (err_exp(p))
 		perror_exp();
