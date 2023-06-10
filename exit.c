@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kelmouto <kelmouto@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ybouzafo <ybouzafo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 11:03:58 by ybouzafo          #+#    #+#             */
-/*   Updated: 2023/06/06 12:53:53 by kelmouto         ###   ########.fr       */
+/*   Updated: 2023/06/09 13:53:17 by ybouzafo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	exit_atoi(char *v)
 	i = 0;
 	nb = 0;
 	neg = 1;
-	s = skip_quot_exp(v);
+	s = skip_quotes(v);
 	while (s[i] && (s[i] == ' ' || s[i] == '\t'))
 		i++;
 	if (s[i] == '+')
@@ -45,7 +45,7 @@ int	check_nb(char *v)
 	char	*s;
 
 	i = 0;
-	s = skip_quot_exp(v);
+	s = skip_quotes(v);
 	while (s[i] && (s[i] == ' ' || s[i] == '\t'))
 		i++;
 	if (s[i] == '+' || s[i] == '-')
@@ -74,7 +74,7 @@ void	ft_exit(t_pars *pars)
 		else
 		{
 			printf("exit\nuskel: exit: %s : numeric argument required\n",
-				pars->cmds[1]);
+					pars->cmds[1]);
 			exit(255);
 		}
 	}

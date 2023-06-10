@@ -1,43 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins.c                                         :+:      :+:    :+:   */
+/*   cd_exec.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kelmouto <kelmouto@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ybouzafo <ybouzafo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/08 14:15:29 by kelmouto          #+#    #+#             */
-/*   Updated: 2023/06/08 14:16:20 by kelmouto         ###   ########.fr       */
+/*   Created: 2023/06/08 10:48:29 by ybouzafo          #+#    #+#             */
+/*   Updated: 2023/06/09 13:49:47 by ybouzafo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int	echo_built(t_pars *pars, t_exp *data)
-{
-	int	d;
-
-	if (pars->cmds && ft_strcmp(pars->cmds[0], "echo") == 0)
-	{
-		if (pars->od != -1 && pars->od < 0)
-		{
-			ft_echo(pars->cmds, data);
-			return (1);
-		}
-		else if (pars->od > 0)
-		{
-			d = dup(1);
-			dup2(pars->od, 1);
-			ft_echo(pars->cmds, data);
-			dup2(d, 1);
-			close(d);
-			close(pars->od);
-			return (1);
-		}
-		else if (pars->od == -1)
-			return (1);
-	}
-	return (0);
-}
 
 int	cd_built(t_pars *pars, t_exp *data)
 {

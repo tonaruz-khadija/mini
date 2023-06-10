@@ -6,7 +6,7 @@
 /*   By: kelmouto <kelmouto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 22:19:00 by kelmouto          #+#    #+#             */
-/*   Updated: 2023/06/06 16:50:04 by kelmouto         ###   ########.fr       */
+/*   Updated: 2023/06/09 18:23:05 by kelmouto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,15 +62,11 @@ char	**ft_split(char const *s, char c)
 	int		in_quotes;
 	char	**str;
 	int		k;
-	int		doble;
-	int		single;
 
 	i = 0;
 	j = 0;
 	start = -1;
 	in_quotes = 0;
-	doble = 0;
-	single = 0;
 	if (!s)
 		return (0);
 	str = (char **)malloc((ft_word(s, c) + 1) * sizeof(char *));
@@ -96,27 +92,13 @@ char	**ft_split(char const *s, char c)
 		}
 		while (s[i] != '\0' && (s[i] != c || in_quotes))
 		{
-			if (s[i] == '\"' && !in_quotes)
+			if ((s[i] == '\"' || s[i] == '\'') && !in_quotes)
 			{
-				doble++;
 				in_quotes = 1;
 				str[start][j++] = s[i++];
 				continue ;
 			}
-			if (s[i] == '\"' && in_quotes && doble % 2 == 0)
-			{
-				in_quotes = 0;
-				str[start][j++] = s[i++];
-				continue ;
-			}
-			if (s[i] == '\'' && !in_quotes)
-			{
-				single++;
-				in_quotes = 1;
-				str[start][j++] = s[i++];
-				continue ;
-			}
-			if (s[i] == '\'' && in_quotes && single % 2 == 0)
+			if ((s[i] == '\"' || s[i] == '\'') && in_quotes)
 			{
 				in_quotes = 0;
 				str[start][j++] = s[i++];
@@ -128,7 +110,7 @@ char	**ft_split(char const *s, char c)
 		j = 0;
 	}
 	str[start] = 0;
-	return(str);
+	return (str);
 }
 
 char	**my_split(char *s, char c)
@@ -166,7 +148,9 @@ char	**my_split(char *s, char c)
 			i++;
 		}
 		else
+		{
 			str[k++] = s[i++];
+		}
 	}
 	if (k > 0)
 	{

@@ -1,0 +1,5 @@
+cat $HOME $USER
+4
+
+cat HOME
+

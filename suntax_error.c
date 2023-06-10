@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   suntax_error.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ybouzafo <ybouzafo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kelmouto <kelmouto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 20:54:23 by ybouzafo          #+#    #+#             */
-/*   Updated: 2023/05/30 21:33:40 by ybouzafo         ###   ########.fr       */
+/*   Updated: 2023/06/09 18:24:56 by kelmouto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ int	check_redirect(char *str, int i)
 	}
 	return (i);
 }
+
 int	check_justspace(char *str)
 {
 	size_t	i;
@@ -95,6 +96,14 @@ int	check_justspace(char *str)
 		return (-1);
 	return (0);
 }
+
+void squipe(char c, char *s, int *i)
+{
+	*i += 1;
+	while(s[*i] != c)
+		*i += 1;
+}
+
 int	check_ozel_char(char *str)
 {
 	int	i;
@@ -104,6 +113,8 @@ int	check_ozel_char(char *str)
 		i++;
 	while (str[i])
 	{
+		if(str[i] == '\'' || str[i] == '"')
+			squipe(str[i],str,&i);
 		if (str[i] == '<' && str[i + 1] == '>')
 			return (ft_perror());
 		if (str[i] == '>' && str[i + 1] == '<')

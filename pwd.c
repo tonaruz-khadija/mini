@@ -6,7 +6,7 @@
 /*   By: ybouzafo <ybouzafo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 14:37:31 by ybouzafo          #+#    #+#             */
-/*   Updated: 2023/05/25 10:45:57 by ybouzafo         ###   ########.fr       */
+/*   Updated: 2023/06/09 13:48:35 by ybouzafo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,9 @@ void	extr_pwd(t_exp *data)
 
 void	pwd_env(t_pars *pars, t_exp *data)
 {
-	int i = 0;
+	int	i;
+
+	i = 0;
 	while (pars)
 	{
 		i = 0;

@@ -6,7 +6,7 @@
 /*   By: kelmouto <kelmouto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 11:33:17 by kelmouto          #+#    #+#             */
-/*   Updated: 2023/06/08 13:24:32 by kelmouto         ###   ########.fr       */
+/*   Updated: 2023/06/10 14:03:34 by kelmouto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,78 +29,37 @@ void	ft_add_to_pars(t_pars **a, t_pars *new)
 	}
 }
 
-char	**pr_envr(t_exp *data)
-{
-	int		i;
-	t_exp	*tmp;
-	int		e;
-	char	**arr;
-
-	arr = NULL;
-	e = 0;
-	i = 0;
-	tmp = data;
-	while (data)
-	{
-		e++;
-		data = data->next;
-	}
-	arr = (char **)malloc((e + 1) * sizeof(char *));
-	data = tmp;
-	i = 0;
-	while (data && i < e)
-	{
-		if(srch_egal(data->key))
-		{
-			arr[i] = ft_strjoina(data->key, data->value);
-			i++;
-		}
-		data = data->next;
-		
-	}
-	arr[i] = NULL;
-	return (arr);
-}
-
-int	ft_strcmp(char *p1, char *p2)
-{
-	int	i;
-
-	i = 0;
-	while ((p1[i] != '\0' || p2[i] != '\0'))
-	{
-		if (p1[i] != p2[i])
-		{
-			return (p1[i] - p2[i]);
-		}
-		i++;
-	}
-	return (0);
-}
-
-
 void	parsing(t_pars *pars, t_exp *data)
 {
 	char	**a;
 	t_pars	*new_pars;
 	char	**split;
 	int		i;
-	t_pars	*tmp;
+	int		t;
 
+	t = 0;
 	i = 0;
-	(void)data;
 	if (pars->cmd == NULL || pars->cmd[0] == '\0')
 		return ;
 	if (check_error(pars->cmd))
+	{
+		g_exit_status = 258;
 		return ;
-	
+	}
 	if (nmbr_quotes(pars->cmd) == 1)
 	{
 		printf("Syntax error : (close the quotes) \n");
+		g_exit_status = 258;
 		return ;
 	}
 	check_symbole(pars);
 	a = my_split(pars->cmd, '|');
+	a = func_expand(a, data);
+	while(*a)
+	{
+		printf(" a : %s\n", *a);
+		a++;
+	}
 	pars = NULL;
 	while (*a)
 	{
@@ -113,33 +72,7 @@ void	parsing(t_pars *pars, t_exp *data)
 		ft_add_to_pars(&pars, new_pars);
 		a++;
 	}
-		tmp = pars;
-	while (pars)
-	{
-		i = 0;
-		while (pars->s[i])
-		{
-			if (strcmp(pars->s[i], "<<") == 0)
-			{
-				i++;
-				if (pars->s[i][0] == '$')
-				{
-					i++;
-				}
-				if (pars->s[i] == NULL)
-				{
-					break ;
-				}
-			}
-			if (pars->s[i][0] == '$')
-			{
-				pars->s[i] = expand(pars->s[i], data);
-			}
-			i++;
-		}
-		pars = pars->next;
-	}
-	pars = tmp;
 	handl_redirec(pars, data);
 	execution(pars, data);
 }
+//ls |  cat main.c |  grep a > $a

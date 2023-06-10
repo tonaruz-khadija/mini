@@ -6,7 +6,7 @@
 /*   By: ybouzafo <ybouzafo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 11:07:21 by ybouzafo          #+#    #+#             */
-/*   Updated: 2023/05/29 09:49:04 by ybouzafo         ###   ########.fr       */
+/*   Updated: 2023/06/09 14:07:31 by ybouzafo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,9 @@ void	unset_enva(t_exp *data, char *var_name)
 		if (ft_strcmp(current->key, var_name) == 0)
 		{
 			if (previous == NULL)
-			{
 				data = current->next;
-			}
 			else
-			{
 				previous->next = current->next;
-			}
 			free(current->key);
 			free(current->value);
 			free(current);
@@ -45,8 +41,8 @@ void	unset_enva(t_exp *data, char *var_name)
 
 void	unset_env(char **cmds, t_exp *data)
 {
-	int i;
-	char *var_name;
+	int		i;
+	char	*var_name;
 
 	i = 1;
 	while (cmds[i])

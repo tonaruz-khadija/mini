@@ -6,7 +6,7 @@
 /*   By: kelmouto <kelmouto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 06:07:56 by ybouzafo          #+#    #+#             */
-/*   Updated: 2023/06/06 14:12:31 by kelmouto         ###   ########.fr       */
+/*   Updated: 2023/06/09 15:40:03 by kelmouto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 // void	handl_c(int c)
 // {
 // 	(void)c;
+// 	g_exit_status = 1;
 // 	write(1, "\n", 1);
 // 	rl_on_new_line();
 // 	rl_replace_line("", 0);
@@ -32,8 +33,7 @@ int	main(int ac, char **av, char **env)
 	pars = malloc(sizeof(t_pars));
 	(void)ac;
 	(void)av;
-	
-	data = my_export(env);
+	data = my_export(pars,env);
 	// pars->cmd = NULL;
 	i = 0;
 	while (1)
@@ -45,7 +45,10 @@ int	main(int ac, char **av, char **env)
 			continue ;
 		if (pars->cmd == NULL)
 			exit(1);
-		add_history(pars->cmd);
+		if (ft_strlen(pars->cmd) != 0)
+		{
+			add_history(pars->cmd);
+		}
 		parsing(pars, data);
 	}
 	printf("\n");

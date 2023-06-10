@@ -6,7 +6,7 @@
 /*   By: kelmouto <kelmouto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 05:04:22 by ybouzafo          #+#    #+#             */
-/*   Updated: 2023/06/08 14:12:41 by kelmouto         ###   ########.fr       */
+/*   Updated: 2023/06/10 14:42:25 by kelmouto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,10 @@
 #  define BUFFER_SIZE 6
 # endif
 
+int					g_exit_status;
+//extern void			rl_replace_line(const char *str, int n);
+
+// une seule globale.
 typedef struct s_pars
 {
 	char			**s;
@@ -74,7 +78,7 @@ int					is_alphanum(char c);
 char				*add_sp(char *s);
 void				check_symbole(t_pars *pars);
 void				supprimer_espaces(char *texte);
-
+void	should_add_sp(char *s, char **d, int i, int count);
 /*----------------------------------------herdoc.c-----------------------------------------------*/
 void				create_herdoc(t_pars *pars, char *str, t_exp *data);
 
@@ -119,20 +123,39 @@ char				**ft_splita(char const *s, char c);
 size_t				ft_strlcpy(char *dst, const char *src, size_t size);
 /*---------------------------------------echo.c-----------------------------------------------*/
 void				ft_echo(char **cmds, t_exp *data);
-
+// int					type_quot(char *str);
+// char				*skip_quotes(char *str);
+char				*skip_double(char *str);
+char				*skip_single(char *str);
 int					type_quot(char *str);
+int					var_quotes(char *str);
 char				*skip_quotes(char *str);
+int					nmbr_qu(char *str);
+int					check_n(char *str);
 /*---------------------------------------pwd.c-----------------------------------------------*/
 
 void				extr_pwd(t_exp *data);
 void				pwd_env(t_pars *pars, t_exp *data);
 /*---------------------------------------cd_rep.c-----------------------------------------------*/
 
-void				cd_rep(t_pars *pars, char **env);
-
+// void				cd_rep(t_pars *pars, char **env);
 int					cd_repa(t_pars *pars, t_exp *data);
 void				mod_envr(t_exp *data, char *str);
-//char				**modif_envr(t_pars *pars);
+int					cd_repa_dort(char *str, t_exp *data, int t);
+int					cd_repa_iki(char *str, t_exp *data, int t);
+int					cd_continu(t_exp *data, char *str, int t);
+void				path_absolu(t_exp *data, char *str);
+void				change_envir(t_exp *data);
+void				mod_point(t_exp *data);
+void				change_pwd(char *str, t_exp *data);
+
+void				get_cd(t_exp *data);
+void				sauf_cd(t_exp *data);
+void				cd_dash(t_exp *data);
+void				cd_dollar(t_exp *data, char *str);
+void				cd_point(t_exp *data);
+void				cd_deux_point(t_exp *data);
+void				add_old(t_exp *data, char *ptr);
 
 /*---------------------------------------get_env.c-----------------------------------------------*/
 
@@ -154,23 +177,20 @@ int					min_check(t_exp *new_tmp, char *s);
 int					min_check2(t_exp *new_tmp, char *s);
 int					check_export(t_exp **data, t_pars *pars, char *ptr);
 char				*trim_egal(char *p);
-char				*skip_quot_exp(char *s);
-char				*trim_quotes(char *s, int *i, char c);
-char				*min_skip(char *s, int *i, char c, char *str);
 int					check_er_syntax(char *s);
 int					err_exp(char *s);
 void				perror_exp(void);
 int					is_alph_digit(char c);
+
 /*-------------------------------------env-------------------------------------------------------*/
-t_exp				*my_export(char **env);
-void				check_pwd_env(char **env, t_exp *data, t_exp *new_data);
-void				srch_oldpwd(t_exp *data, char *s, int k);
-t_exp				*env_null(t_exp *new_data, t_exp *data);
-void				min_env_null(t_exp *data, t_exp *new, t_exp *current,
-						t_exp *tmp);
+t_exp				*my_export(t_pars *pars,char **env);
 char				*copy_value(char *s, int k);
 char				*copy_key(char *s, int k);
-t_exp				*init(t_exp *data);
+void				min_env_null(t_exp *data, t_exp *new, t_exp *current,
+						t_exp *tmp);
+t_exp				*env_null(t_exp *new_data, t_exp *data);
+void				srch_oldpwd(t_exp *data, char *s, int k);
+void				check_pwd_env(char **env, t_exp *data, t_exp *new_data);
 /*-------------------------------------unset.c--------------------------------------------------------*/
 void				unset_env(char **cmds, t_exp *data);
 /*----------------------------execution---------------------------------------------------------------*/
@@ -178,7 +198,6 @@ void				execution(t_pars *pars, t_exp *data);
 char				*ext_path(t_exp *data);
 int					ft_access(char **ptr, t_pars *pars, t_exp *data,
 						char **arr);
-int					exp_builtins(t_pars *pars, t_exp *data);
 /*----------------------------env-- -------------------------------------------------------------*/
 void				extr_envir(t_pars *pars, t_exp *data);
 /*----------------------------exit-- -------------------------------------------------------------*/
@@ -191,15 +210,48 @@ char				**pr_envr(t_exp *data);
 int					old_var(t_exp *data);
 int					y_a_quotes(char *str);
 char				*egal(t_exp *data, char *comp);
-/****************************************builtins***********************************************/
-int					export_built(t_pars *pars, t_exp *data);
-int					exit_built(t_pars *pars);
-int					pwd_unset(t_pars *pars, t_exp *data, int x);
-int					env_built(t_pars *pars, t_exp *data);
-int					echo_built(t_pars *pars, t_exp *data);
-int					cd_built(t_pars *pars, t_exp *data);
+int					builtin(t_pars *pars, t_exp *data, int x);
+/*-------------------------------------exec.norm-------------------------------------------------------*/
+void				cd_fonction(t_pars *pars, t_exp *data, int x);
+void				fonction(t_exp *data, t_pars *pars);
 void				ajout_oldpwd(t_exp *data, char *st);
-int					old_var(t_exp *data);
-int					cd_builtin(t_pars *pars, t_exp *data, int x);
+int					echo_exec(t_pars *pars, t_exp *data);
+void				echo_n(char **cmds, t_exp *data, int t, int i);
+void				echo_sans_n(char **cmds, t_exp *data, int t);
+int					func_echo(char *cmds, char *cmdplus, t_exp *data);
+int					func_sans_n(char *cmds, t_exp *data);
+char				*trim_quotes(char *s, int *j, char c);
+char				*min_skip(char *s, int *i, char c, char *str);
+char				*skip_quot_exp(char *s);
+/*-------------------------------------redirec_norm-------------------------------------------------------*/
+int					handle_output_redirect_conditions(t_exp *data, t_pars *pars,
+						int s, int i);
+void				handle_output_redirect(t_pars *pars, t_exp *data, int i);
+void				handle_redirect_output(t_pars *pars, t_exp *data);
+void				handle_input_redirect(t_pars *pars, int i);
+void				handle_redirect_input(t_pars *pars);
+void				handle_heredoc(t_pars *pars, t_exp *data, int i);
+void				handle_append_output_redirect(t_pars *pars, t_exp *data,
+						int i);
+//int					red_continue(t_pars *pars, t_exp *data, int i);
+/************************************builtins********************************/
+int	exp_builtins(t_pars *pars, t_exp *data);
+int	export_built(t_pars *pars, t_exp *data);
+int	exit_built(t_pars *pars);
+int	pwd_unset(t_pars *pars, t_exp *data, int x);
+int	env_built(t_pars *pars, t_exp *data);
+int	cd_built(t_pars *pars, t_exp *data);
+int	cd_builtin(t_pars *pars, t_exp *data, int x);
+/*---------------------------------expand before split --------------------------------*/
+int	find_redir(char *p, int j);
+char	*expand_str(char *p, t_exp *data);
+char	*str_join1(char *v, char *f, char *p);
+char	*str_join2(char *p,char *t, char *f);
+void	free_str(char *p, char *f, char *t, char *v);
+int	is_alph_num(char c);
+char	*expand_func(char *s, int *j, t_exp *data);
+char	**func_expand(char **a, t_exp *data);
+int	ft_ls_size(t_exp *p);
+void squipe(char c, char *s, int *i);
 
 #endif

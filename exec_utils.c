@@ -6,7 +6,7 @@
 /*   By: kelmouto <kelmouto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 18:55:42 by kelmouto          #+#    #+#             */
-/*   Updated: 2023/06/07 11:54:25 by kelmouto         ###   ########.fr       */
+/*   Updated: 2023/06/09 18:06:21 by kelmouto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ int	ft_access(char **ptr, t_pars *pars, t_exp *data, char **arr)
 
 	(void)data;
 	i = 0;
-	
 	while (ptr[i])
 	{
+		
 		if (access(ptr[i], 0) == 0)
 		{
 			return (execve(ptr[i], pars->cmds, arr));
@@ -28,7 +28,7 @@ int	ft_access(char **ptr, t_pars *pars, t_exp *data, char **arr)
 		i++;
 	}
 	write(2, "command not found\n", 18);
-	exit(1);
+	exit(127);
 }
 
 char	*ext_path(t_exp *data)

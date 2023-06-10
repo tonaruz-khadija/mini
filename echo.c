@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kelmouto <kelmouto@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ybouzafo <ybouzafo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 13:39:53 by ybouzafo          #+#    #+#             */
-/*   Updated: 2023/06/04 21:27:35 by kelmouto         ###   ########.fr       */
+/*   Updated: 2023/06/08 14:55:13 by ybouzafo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
 char	*skip_double(char *str)
 {
 	int		i;
@@ -173,6 +172,7 @@ int	nmbr_qu(char *str)
 	j = count + len;
 	return (j);
 }
+
 int	check_n(char *str)
 {
 	int	i;
@@ -198,14 +198,11 @@ int	check_n(char *str)
 void	ft_echo(char **cmds, t_exp *data)
 {
 	int	i;
-	int	j;
-	int	k;
-	int	x;
+	int	t;
+	int	a;
 
-	j = 0;
-	k = 0;
-	x = 0;
-	(void)data;
+	a = 0;
+	t = 0;
 	i = 1;
 	if (cmds[i] == NULL)
 	{
@@ -214,78 +211,10 @@ void	ft_echo(char **cmds, t_exp *data)
 	}
 	if (cmds[i] && check_n(cmds[i]) == 2)
 	{
-		i = 2;
-		while (cmds[i] && check_n(cmds[i]) == 2)
-			i++;
-		while (cmds[i])
-		{
-			if ((nmbr_qu(cmds[i]) == 0 || nmbr_qu(cmds[i]) == 2)
-				&& type_quot(cmds[i]))
-			{
-				cmds[i] = skip_quotes(cmds[i]);
-				if (ft_expanda(cmds[i], data) == 0)
-				{
-					write(1, cmds[i], ft_strlen(cmds[i]));
-					if (cmds[i + 1])
-						write(1, " ", 1);
-				}
-			}
-			else if (
-				type_quot(cmds[i]) == 0)
-			{
-				cmds[i] = skip_single(cmds[i]);
-				write(1, cmds[i], ft_strlen(cmds[i]));
-				if (cmds[i + 1])
-					write(1, " ", 1);
-			}
-			else if (nmbr_qu(cmds[i]) != 2 && type_quot(cmds[i]) != 0)
-			{
-				cmds[i] = skip_double(cmds[i]);
-				write(1, cmds[i], ft_strlen(cmds[i]));
-				if (cmds[i + 1])
-					write(1, " ", 1);
-			}
-			else
-			{
-				cmds[i] = skip_quotes(cmds[i]);
-				write(1, cmds[i], ft_strlen(cmds[i]));
-				if (cmds[i + 1])
-					write(1, " ", 1);
-			}
-			i++;
-		}
+		echo_n(cmds, data, t, a);
 	}
 	else if (cmds[i] && strcmp(cmds[i], "-n") != 0)
 	{
-		while (cmds && cmds[i])
-		{
-			if ((nmbr_qu(cmds[i]) == 0 || nmbr_qu(cmds[i]) == 2)
-				&& type_quot(cmds[i]))
-			{
-				cmds[i] = skip_quotes(cmds[i]);
-				if (ft_expanda(cmds[i], data) == 0)
-				{
-					printf("%s ", cmds[i]);
-				}
-			}
-			else if (
-				type_quot(cmds[i]) == 0)
-			{
-				cmds[i] = skip_single(cmds[i]);
-				printf("%s ", cmds[i]);
-			}
-			else if (nmbr_qu(cmds[i]) != 2 && type_quot(cmds[i]) != 0)
-			{
-				cmds[i] = skip_double(cmds[i]);
-				printf("%s ", cmds[i]);
-			}
-			else
-			{
-				cmds[i] = skip_quotes(cmds[i]);
-				printf("%s ", cmds[i]);
-			}
-			i++;
-		}
-		printf("\n");
+		echo_sans_n(cmds, data, t);
 	}
 }
