@@ -6,7 +6,7 @@
 /*   By: kelmouto <kelmouto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 05:04:22 by ybouzafo          #+#    #+#             */
-/*   Updated: 2023/06/10 18:32:59 by kelmouto         ###   ########.fr       */
+/*   Updated: 2023/06/11 16:54:28 by kelmouto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,9 +84,9 @@ void				create_herdoc(t_pars *pars, char *str, t_exp *data);
 
 /*----------------------------------------my_split.c-----------------------------------------------*/
 size_t				ft_strlen(const char *str);
-int					ft_word(char const *str, char d);
-char				**ft_split(char const *s, char c);
-char				**my_split(char *s, char c);
+char				**ft_split(char  *s, char c);
+int	compter_mots(char const *s, char c);
+
 /*----------------------------------------my_libft.c-----------------------------------------------*/
 char				*ft_strchr(const char *string, int r);
 char				*ft_strjoin(char *s1, char *s2);
@@ -116,9 +116,8 @@ int					check_last_char(char *str);
 int					check_double_redirec1(char *str);
 int					check_double_redirec2(char *str);
 /*----------------------------------------utils.c-----------------------------------------------*/
-size_t				ft_wlen(char const *s, int c, int i);
-void				ft_free(char **s);
-size_t				count_wrd(char const *s, int c, int i);
+char    **fill_string(char const *s, char c, char **strings, int start);
+void     func_free(char **s);
 char				**ft_splita(char const *s, char c);
 size_t				ft_strlcpy(char *dst, const char *src, size_t size);
 /*---------------------------------------echo.c-----------------------------------------------*/
@@ -256,6 +255,6 @@ int	ft_isspace(char c);
 void	squipe_pro(char *s,char **st,int *i, t_exp *data);
 char	*expand_file(char *a, t_exp *data);
 int check_ambiguous(char *s);
-int	compter_mots(char const *s, char c);
+
 
 #endif

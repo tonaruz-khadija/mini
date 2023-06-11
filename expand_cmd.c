@@ -6,7 +6,7 @@
 /*   By: kelmouto <kelmouto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 11:54:21 by kelmouto          #+#    #+#             */
-/*   Updated: 2023/06/10 15:32:57 by kelmouto         ###   ########.fr       */
+/*   Updated: 2023/06/11 18:47:12 by kelmouto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,7 @@ void 	add_filename(char **s,char *a , int *i)
 
 char	**func_expand(char **a, t_exp *data)
 {
-	char *s = NULL;
+	char *s;
 	int	i;
 	int	j;
 
@@ -139,6 +139,7 @@ char	**func_expand(char **a, t_exp *data)
 	while (a[i])
 	{
 		j = 0;
+		s = NULL;
 		while (a[i][j])
 		{
 			if(a[i][j] == '<' || a[i][j] == '>')
@@ -150,8 +151,10 @@ char	**func_expand(char **a, t_exp *data)
 			else
 				add_char(&s, a[i][j]);
 			j++;
+			
 		}
 		a[i] = s;
+	
 		i++;
 	}
 	return (a);

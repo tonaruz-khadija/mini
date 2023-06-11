@@ -6,7 +6,7 @@
 /*   By: kelmouto <kelmouto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 20:45:16 by ybouzafo          #+#    #+#             */
-/*   Updated: 2023/06/09 15:27:15 by kelmouto         ###   ########.fr       */
+/*   Updated: 2023/06/11 16:42:42 by kelmouto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,14 @@ void	should_add_sp(char *s, char **d, int i, int count)
 	}
 }
 
+void squipe_toadd(char **at, char *s,char c , int *i)
+{
+	add_char(at,s[(*i)++]);
+	while(s[*i] != c)
+		add_char(at,s[(*i)++]);
+	add_char(at,s[(*i)++]);
+}
+
 char	*add_sp(char *s)
 {
 	int		i;
@@ -45,6 +53,8 @@ char	*add_sp(char *s)
 	count = 0;
 	while (s[i])
 	{
+		if(s[i] == '\'' || s[i] == '"')
+			squipe_toadd(&d, s, s[i], &i);
 		should_add_sp(s, &d, i, count);
 		if ((!count || count % 2 == 0) && (d && s[i - 1] != s[i]
 				&& (d[ft_strlen(d) - 1] == '<' || d[ft_strlen(d) - 1] == '>'))

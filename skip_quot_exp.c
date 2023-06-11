@@ -6,7 +6,7 @@
 /*   By: kelmouto <kelmouto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 13:41:30 by kelmouto          #+#    #+#             */
-/*   Updated: 2023/06/09 18:36:53 by kelmouto         ###   ########.fr       */
+/*   Updated: 2023/06/11 14:49:35 by kelmouto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ char	*trim_quotes(char *s, int *j, char c)
 		(*j)++;
 	end = (*j);
 	str = ft_substr(s, start, end - start);
+	printf("str : %s\n",str);
 	return (str);
 }
 
@@ -46,11 +47,16 @@ char	*skip_quot_exp(char *s)
 		return (NULL);
 	while (s[i])
 	{
-		if (s[i] == '\'' || s[i] =='"')
+		if (s[i] == '\'')
+			str = min_skip(s, &i, s[i], str);
+		if (s[i] == '"')
 			str = min_skip(s, &i, s[i], str);
 		else
 			add_char(&str, s[i]);
-		i++;
+		if(s[i])
+			i++;
 	}
 	return (str);
 }
+
+
