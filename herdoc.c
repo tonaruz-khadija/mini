@@ -6,7 +6,7 @@
 /*   By: ybouzafo <ybouzafo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 20:34:52 by ybouzafo          #+#    #+#             */
-/*   Updated: 2023/06/09 11:20:47 by ybouzafo         ###   ########.fr       */
+/*   Updated: 2023/06/12 11:56:32 by ybouzafo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	create_herdoc(t_pars *pars, char *str, t_exp *data)
 
 	k = 0;
 	i = 0;
+	g_exit_status = 0;
 	signal(SIGINT, SIG_IGN);
 	if (pipe(pars->herdoc_fd) == -1)
 	{

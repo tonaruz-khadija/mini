@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kelmouto <kelmouto@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ybouzafo <ybouzafo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 13:27:46 by kelmouto          #+#    #+#             */
-/*   Updated: 2023/06/08 14:15:21 by kelmouto         ###   ########.fr       */
+/*   Updated: 2023/06/12 11:48:59 by ybouzafo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ int	pwd_unset(t_pars *pars, t_exp *data, int x)
 {
 	if (pars->cmds && ft_strcmp(pars->cmds[0], "pwd") == 0)
 	{
+		g_exit_status = 0;
 		pwd_env(pars, data);
 		return (1);
 	}
@@ -83,6 +84,7 @@ int	pwd_unset(t_pars *pars, t_exp *data, int x)
 	{
 		if (x == 0)
 		{
+			g_exit_status = 0;
 			unset_env(pars->cmds, data);
 			return (1);
 		}

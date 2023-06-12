@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   skip_quot_exp.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kelmouto <kelmouto@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ybouzafo <ybouzafo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 13:41:30 by kelmouto          #+#    #+#             */
-/*   Updated: 2023/06/11 14:49:35 by kelmouto         ###   ########.fr       */
+/*   Updated: 2023/06/12 11:34:53 by ybouzafo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ char	*trim_quotes(char *s, int *j, char c)
 	char	*str;
 
 	start = ++(*j);
-	while (s[*j]&& s[*j] != c)
+	while (s[*j] && s[*j] != c)
 		(*j)++;
 	end = (*j);
 	str = ft_substr(s, start, end - start);
-	printf("str : %s\n",str);
+	// printf("str : %s\n",str);
 	return (str);
 }
 
@@ -53,10 +53,8 @@ char	*skip_quot_exp(char *s)
 			str = min_skip(s, &i, s[i], str);
 		else
 			add_char(&str, s[i]);
-		if(s[i])
+		if (s[i])
 			i++;
 	}
 	return (str);
 }
-
-

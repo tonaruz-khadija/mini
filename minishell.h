@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kelmouto <kelmouto@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ybouzafo <ybouzafo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 05:04:22 by ybouzafo          #+#    #+#             */
-/*   Updated: 2023/06/12 13:48:09 by kelmouto         ###   ########.fr       */
+/*   Updated: 2023/06/12 14:15:43 by ybouzafo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define MINISHELL_H
 
 # include <fcntl.h>
+# include <limits.h>
 # include <readline/history.h>
 # include <readline/readline.h>
 # include <signal.h>
@@ -32,6 +33,7 @@
 int					g_exit_status;
 //extern void			rl_replace_line(const char *str, int n);
 
+// une seule globale.
 typedef struct s_pars
 {
 	char			**s;
@@ -105,14 +107,12 @@ void				print_noeud(t_pars *pars);
 void				print_herdoc(t_pars *pars);
 void				print_pars(t_pars *pars);
 int					check_if_builtin(t_pars *pars, t_exp *data, int x);
+
 /*----------------------------------------syntax_error.c-----------------------------------------------*/
 int					is_all_space(char *s);
 int					check_pipe(char *s);
 int					check_error(char *str);
-void				ft_perror(void);
-/*squipe rah deja kyna mdeclaria
-fl parsing.c bdli dik chek error diri hdaha zhd ! drtha ktreturner 0 la kan error*/
-
+int					ft_perror(void);
 /*----------------------------------------utils.c-----------------------------------------------*/
 char				**fill_string(char const *s, char c, char **strings,
 						int start);
@@ -147,7 +147,7 @@ void				change_envir(t_exp *data);
 void				mod_point(t_exp *data);
 void				change_pwd(char *str, t_exp *data);
 
-void				get_cd(t_exp *data);
+void				get_cd(char *old, char *pwd, t_exp *data);
 void				sauf_cd(t_exp *data);
 void				cd_dash(t_exp *data);
 void				cd_dollar(t_exp *data, char *str);
@@ -254,5 +254,6 @@ int					ft_isspace(char c);
 void				squipe_pro(char *s, char **st, int *i, t_exp *data);
 char				*expand_file(char *a, t_exp *data);
 int					check_ambiguous(char *s);
+char				*ft_itoa(int n);
 
 #endif

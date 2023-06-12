@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kelmouto <kelmouto@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ybouzafo <ybouzafo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 11:33:17 by kelmouto          #+#    #+#             */
-/*   Updated: 2023/06/12 13:49:41 by kelmouto         ###   ########.fr       */
+/*   Updated: 2023/06/12 14:18:16 by ybouzafo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,22 +31,28 @@ void	ft_add_to_pars(t_pars **a, t_pars *new)
 
 char	*expand_file(char *a, t_exp *data)
 {
-	char *s = NULL;
-	int i;
+	char	*s;
+	int		i;
+
+	s = NULL;
 	i = 0;
-	while(a[i])
+	while (a[i])
 	{
-		if(a[i] == '"' || a[i] == '\'')
-				squipe_pro(a, &s, &i,data);
+		if (a[i] == '"' || a[i] == '\'')
+			squipe_pro(a, &s, &i, data);
 		else if (a[i] == '$')
-				add_many_chars(&s, expand_func(a, &i, data));
+			add_many_chars(&s, expand_func(a, &i, data));
 		else
-				add_char(&s, a[i]);
+			add_char(&s, a[i]);
 		i++;
+	}
+	if (compter_mots(s, ' ') > 1)
+	{
+		printf("uskel : ambiguous redirect \n");
+		return (NULL);
 	}
 	return (s);
 }
-
 
 void	parsing(t_pars *pars, t_exp *data)
 {

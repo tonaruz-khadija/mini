@@ -6,7 +6,7 @@
 /*   By: kelmouto <kelmouto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 20:54:23 by ybouzafo          #+#    #+#             */
-/*   Updated: 2023/06/12 14:02:33 by kelmouto         ###   ########.fr       */
+/*   Updated: 2023/06/12 16:11:24 by kelmouto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	squipe(char c, char *s, int *i)
 {
 	*i += 1;
-	while (s[*i] != c)
+	while ( s[*i] &&  s[*i] != c)
 		*i += 1;
 }
 
@@ -35,8 +35,7 @@ int	check_pipe(char *s)
 				i++;
 			if (s[i] == '|')
 			{
-				printf("uskel: syntax  ******error near unexpected token `|'\n");
-				
+				printf("uskel: syntax error near unexpected token `|'\n");
 				g_exit_status = 258;
 				return (0);
 			}
@@ -62,11 +61,12 @@ int	is_all_space(char *s)
 	return (1);
 }
 
-void	ft_perror(void)
+int	ft_perror(void)
 {
 	g_exit_status = 258;
 	printf("uskel :syntax error near ");
-	printf("unexpected token redirection `<'\n");
+	printf("unexpected token  \n");
+	return (0);
 }
 
 int	check_error(char *s)
@@ -81,18 +81,17 @@ int	check_error(char *s)
 	{
 		if (s[i] == '\'' || s[i] == '"')
 			squipe(s[i], s, &i);
-		else if(s[i] == '>' || s[i] == '<' )
+		else if (s[i] == '>' || s[i] == '<')
 		{
 			c = s[i++];
 			(s[i] == c) && (i++);
-			while(ft_isspace(s[i]))
+			while (ft_isspace(s[i]))
 				i++;
 			if (s[i] == '>' || s[i] == '<' || s[i] == '|')
-			{
-				ft_perror();
-				return (0);
-			}
+				return (ft_perror());
 		}
+		else if (s[i] == ';' || s[i] == '*')
+			return (ft_perror());
 		i++;
 	}
 	return (check_pipe(s));

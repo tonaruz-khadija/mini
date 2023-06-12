@@ -6,7 +6,7 @@
 /*   By: ybouzafo <ybouzafo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 10:48:29 by ybouzafo          #+#    #+#             */
-/*   Updated: 2023/06/09 13:49:47 by ybouzafo         ###   ########.fr       */
+/*   Updated: 2023/06/12 11:41:21 by ybouzafo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,21 @@
 
 int	cd_built(t_pars *pars, t_exp *data)
 {
-	t_exp	*dt;
 	char	*st;
+	char	buffer[PATH_MAX];
 
+	st = strdup(getcwd(buffer, sizeof(buffer)));
 	if (pars->cmds[1] && ft_strcmp(pars->cmds[1], "-") != 0
 		&& old_var(data) == 0)
 	{
-		dt = data;
-		while (data)
+		if (cd_repa(pars, data) == 1)
 		{
-			if (strcmp(data->key, "PWD=") == 0)
-			{
-				st = malloc(strlen(data->value) + 1);
-				st = strcpy(st, data->value);
-			}
-			data = data->next;
+			ajout_oldpwd(data, st);
 		}
-		data = dt;
+		return (1);
+	}
+	else if (pars->cmds[1] == NULL)
+	{
 		if (cd_repa(pars, data) == 1)
 		{
 			ajout_oldpwd(data, st);
@@ -49,6 +47,7 @@ int	cd_builtin(t_pars *pars, t_exp *data, int x)
 			if (pars->cmds[1] && ft_strcmp(pars->cmds[1], "-") == 0
 				&& old_var(data) == 0)
 			{
+				g_exit_status = 1;
 				printf("minishell: cd: OLDPWD not set\n");
 				return (1);
 			}

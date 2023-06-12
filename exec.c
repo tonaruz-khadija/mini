@@ -6,39 +6,33 @@
 /*   By: kelmouto <kelmouto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 10:14:55 by ybouzafo          #+#    #+#             */
-/*   Updated: 2023/06/10 18:51:34 by kelmouto         ###   ########.fr       */
+/*   Updated: 2023/06/12 16:20:32 by kelmouto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-
 int	check_if_builtin(t_pars *pars, t_exp *data, int x)
 {
-	
 	if (pars->cmds == NULL)
 		return (1);
-	if (!ft_strcmp(pars->cmds[0], "\"\""))
-		return (0);
+	// if (!ft_strcmp(pars->cmds[0], "\"\""))
+	// 	return (0);
 	if (pars->cmds && (strcmp(pars->cmds[0], "echo") == 0))
 	{
 		echo_exec(pars, data);
 		return (1);
 	}
-	if(env_built(pars,data))
-		return(1);
-	if(cd_builtin(pars,data,x))
-		return(1);
-	
-	if(pwd_unset(pars, data, x))
-		return(1);
-	
-	
-	
-	if(exit_built(pars))
-		return(1);
-	if(export_built(pars,data))
-		return(1);
+	if (env_built(pars, data))
+		return (1);
+	if (cd_builtin(pars, data, x))
+		return (1);
+	if (pwd_unset(pars, data, x))
+		return (1);
+	if (exit_built(pars))
+		return (1);
+	if (export_built(pars, data))
+		return (1);
 	else
 	{
 		return (-1);
@@ -60,8 +54,6 @@ void	func_multiple_pipe(t_pars *pars, t_exp *data)
 
 	x = 0;
 	j = dup(0);
-	
-	
 	i = 0;
 	while (pars)
 	{
@@ -192,8 +184,6 @@ void	execution(t_pars *pars, t_exp *data)
 
 	x = 0;
 	j = dup(0);
-	
-
 	i = 0;
 	if (ft_lssize(pars) == 1)
 	{

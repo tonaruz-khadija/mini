@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kelmouto <kelmouto@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ybouzafo <ybouzafo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 10:51:33 by ybouzafo          #+#    #+#             */
-/*   Updated: 2023/06/10 13:01:31 by kelmouto         ###   ########.fr       */
+/*   Updated: 2023/06/12 11:47:21 by ybouzafo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	extr_envir(t_pars *pars, t_exp *data)
 	int	i;
 
 	i = 0;
+	g_exit_status = 0;
 	while (pars)
 	{
 		i = 0;

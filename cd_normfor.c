@@ -6,14 +6,33 @@
 /*   By: ybouzafo <ybouzafo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 08:41:15 by ybouzafo          #+#    #+#             */
-/*   Updated: 2023/06/08 18:05:38 by ybouzafo         ###   ########.fr       */
+/*   Updated: 2023/06/12 11:43:04 by ybouzafo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
+void	get_cd(char *old, char *pwd, t_exp *data)
+{
+	while (data)
+	{
+		if (strcmp((data->key), "PWD=") == 0)
+		{
+			data->value = pwd;
+		}
+		if (strcmp((data->key), "OLDPWD=") == 0)
+		{
+			data->value = old;
+		}
+		data = data->next;
+	}
+}
 void	sauf_cd(t_exp *data)
 {
+	char	*old;
+	char	buffer[PATH_MAX];
+	char	*pwd;
+
+	old = strdup(getcwd(buffer, sizeof(buffer)));
 	while (data)
 	{
 		if (strcmp((data->key), "HOME=") == 0)
@@ -25,28 +44,10 @@ void	sauf_cd(t_exp *data)
 			}
 			if (chdir(data->value) == 0)
 			{
-				get_cd(data);
+				pwd = malloc(strlen(data->value) + 1);
+				pwd = data->value;
+				get_cd(old, pwd, data);
 			}
-		}
-		data = data->next;
-	}
-}
-
-void	add_old(t_exp *data, char *ptr)
-{
-	char	*str;
-
-	while (data)
-	{
-		if (ft_strcmp(data->key, "PWD=") == 0)
-		{
-			str = malloc(strlen(data->value) + 1);
-			str = data->value;
-			data->value = ptr;
-		}
-		if (ft_strcmp(data->key, "OLDPWD=") == 0)
-		{
-			data->value = str;
 		}
 		data = data->next;
 	}
@@ -65,36 +66,45 @@ void	cd_dash(t_exp *data)
 			ptr = malloc(strlen(data->value) + 1);
 			ptr = data->value;
 			printf("%s\n", data->value);
-			chdir(data->value);
+			if (chdir(data->value) == -1)
+			{
+				g_exit_status = 1;
+				perror("chdir");
+				return ;
+			}
 		}
 		data = data->next;
 	}
 	data = tmp;
 	add_old(data, ptr);
 }
-
-void	cd_dollar(t_exp *data, char *str)
+void	get_cd_continue(t_exp *data, char *r, char *ptr)
 {
-	char	*ex;
-
-	ex = ft_expand(str, data);
-	change_pwd(ex, data);
-	if (chdir(ex) == -1)
+	while (data)
 	{
-		perror("chdir");
-		return ;
+		if (strcmp((data->key), "PWD=") == 0)
+			data->value = ptr;
+		if (strcmp((data->key), "OLDPWD=") == 0)
+			data->value = r;
+		data = data->next;
 	}
 }
-
-void	cd_point(t_exp *data)
+void	add_old(t_exp *data, char *ptr)
 {
-	if (chdir(".") == 0)
+	char *str;
+
+	while (data)
 	{
-		mod_point(data);
-	}
-	else
-	{
-		perror("chdir");
-		return ;
+		if (ft_strcmp(data->key, "PWD=") == 0)
+		{
+			str = malloc(strlen(data->value) + 1);
+			str = data->value;
+			data->value = ptr;
+		}
+		if (ft_strcmp(data->key, "OLDPWD=") == 0)
+		{
+			data->value = str;
+		}
+		data = data->next;
 	}
 }

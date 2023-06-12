@@ -6,7 +6,7 @@
 /*   By: ybouzafo <ybouzafo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 11:24:21 by ybouzafo          #+#    #+#             */
-/*   Updated: 2023/06/09 09:27:02 by ybouzafo         ###   ########.fr       */
+/*   Updated: 2023/06/12 11:46:15 by ybouzafo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	echo_exec(t_pars *pars, t_exp *data)
 	}
 	else if (pars->od == -1)
 	{
-		g_exit_status = 0;
+		g_exit_status = 1;
 		return (1);
 	}
 	return (0);
@@ -77,14 +77,12 @@ void	echo_n(char **cmds, t_exp *data, int t, int i)
 		t = func_echo(cmds[i], cmds[i + 1], data);
 		if (t == 0 && nmbr_qu(cmds[i]) != 2 && type_quot(cmds[i]) != 0)
 		{
-			cmds[i] = skip_double(cmds[i]);
 			write(1, cmds[i], ft_strlen(cmds[i]));
 			if (cmds[i + 1])
 				write(1, " ", 1);
 		}
 		else if (t == 0)
 		{
-			cmds[i] = skip_quotes(cmds[i]);
 			write(1, cmds[i], ft_strlen(cmds[i]));
 			if (cmds[i + 1])
 				write(1, " ", 1);

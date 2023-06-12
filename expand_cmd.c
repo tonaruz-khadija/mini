@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kelmouto <kelmouto@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ybouzafo <ybouzafo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 11:54:21 by kelmouto          #+#    #+#             */
-/*   Updated: 2023/06/11 18:47:12 by kelmouto         ###   ########.fr       */
+/*   Updated: 2023/06/12 14:09:35 by ybouzafo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,75 +64,81 @@ char	*expand_func(char *s, int *j, t_exp *data)
 {
 	char	*v;
 	char	*t;
-	int start;
+	int		start;
 
 	start = ++(*j);
-	if(s[*j] == '$')
-		return(ft_strdup(""));
+	if (s[*j] == '$')
+		return (ft_strdup(""));
+	if (s[*j] == '?')
+	{
+		return (ft_itoa(g_exit_status));
+	}
 	while (s[*j] && is_alph_num(s[*j]))
 		(*j)++;
 	v = ft_substr(s, start, *j - start);
 	t = expand_str(v, data);
 	(*j)--;
+	if (t == NULL)
+		printf("uskel :  : ambiguous redirect \n");
 	return (t);
 }
 
 void	add_many_chars(char **s, char *st)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	while(st && st[i])
+	while (st && st[i])
 	{
 		add_char(s, st[i]);
 		i++;
 	}
 }
 
-void	squipe_pro(char *s,char **st,int *i, t_exp *data)
+void	squipe_pro(char *s, char **st, int *i, t_exp *data)
 {
-	char c;
+	char	c;
 
 	c = s[*i];
-	add_char(st,s[*i]);
+	add_char(st, s[*i]);
 	*i += 1;
-	while(s[*i] != c)
+	while (s[*i] != c)
 	{
-		if(s[*i] == '$' && c == '"')
-			add_many_chars(st,expand_func(s, i, data));
+		if (s[*i] == '$' && c == '"')
+			add_many_chars(st, expand_func(s, i, data));
 		else
-			add_char(st,s[*i]);
+			add_char(st, s[*i]);
 		*i += 1;
 	}
-	add_char(st,s[*i]);	
+	add_char(st, s[*i]);
 }
 
 int	ft_isspace(char c)
 {
-	if(c == ' ' || c == '\t' || c == '\v' || c == '\f' || c == '\r')
-		return(1);
-	return(0);
+	if (c == ' ' || c == '\t' || c == '\v' || c == '\f' || c == '\r')
+		return (1);
+	return (0);
 }
 
-void 	add_filename(char **s,char *a , int *i)
+void	add_filename(char **s, char *a, int *i)
 {
-	char c;
+	char	c;
 
 	c = a[*i];
-	while(a[*i] == c)
+	while (a[*i] == c)
 		add_char(s, a[(*i)++]);
-	while(ft_isspace(a[*i]))
-		add_char(s,a[(*i)++]);
-	while(!ft_isspace(a[*i]) && a[*i])
+	while (ft_isspace(a[*i]))
+		add_char(s, a[(*i)++]);
+	while (!ft_isspace(a[*i]) && a[*i])
 		add_char(s, a[(*i)++]);
 	(*i)--;
 }
 
 char	**func_expand(char **a, t_exp *data)
 {
-	char *s;
-	int	i;
-	int	j;
+	char	*s;
+	int		i;
+	int		j;
 
 	i = 0;
 	j = 0;
@@ -142,19 +148,17 @@ char	**func_expand(char **a, t_exp *data)
 		s = NULL;
 		while (a[i][j])
 		{
-			if(a[i][j] == '<' || a[i][j] == '>')
+			if (a[i][j] == '<' || a[i][j] == '>')
 				add_filename(&s, a[i], &j);
-			else if(a[i][j] == '"' || a[i][j] == '\'')
-				squipe_pro(a[i], &s, &j,data);
+			else if (a[i][j] == '"' || a[i][j] == '\'')
+				squipe_pro(a[i], &s, &j, data);
 			else if (a[i][j] == '$')
 				add_many_chars(&s, expand_func(a[i], &j, data));
 			else
 				add_char(&s, a[i][j]);
 			j++;
-			
 		}
 		a[i] = s;
-	
 		i++;
 	}
 	return (a);

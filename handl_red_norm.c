@@ -6,7 +6,7 @@
 /*   By: kelmouto <kelmouto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 09:20:40 by ybouzafo          #+#    #+#             */
-/*   Updated: 2023/06/10 18:46:11 by kelmouto         ###   ########.fr       */
+/*   Updated: 2023/06/12 16:20:25 by kelmouto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,6 @@ void	handle_append_output_redirect(t_pars *pars, t_exp *data, int i)
 	}
 }
 
-
-
 void	handl_redirec(t_pars *pars, t_exp *data)
 {
 	int	i;
@@ -101,7 +99,12 @@ void	handl_redirec(t_pars *pars, t_exp *data)
 				i++;
 			}
 			else
-				ft_add_cmds(skip_quot_exp(pars->s[i]), &pars->cmds);
+			{
+				if (ft_strcmp(pars->s[0], "\"\""))
+					ft_add_cmds(skip_quot_exp(pars->s[i]), &pars->cmds);
+				ft_add_cmds(pars->s[i], &pars->cmds);
+
+			}
 			i++;
 		}
 		pars = pars->next;
