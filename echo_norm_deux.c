@@ -6,7 +6,7 @@
 /*   By: kelmouto <kelmouto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 11:58:27 by ybouzafo          #+#    #+#             */
-/*   Updated: 2023/06/11 13:23:53 by kelmouto         ###   ########.fr       */
+/*   Updated: 2023/06/12 13:16:49 by kelmouto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,7 @@ int	func_sans_n(char *cmds, t_exp *data)
 	{
 		t++;
 		cmds = skip_quotes(cmds);
-		// if (ft_expanda(cmds, data) != 0)
-		// {
-		// 	cmds = ft_expanda(cmds, data);
 			printf("%s ", cmds);
-		// }
 	}
 	else if (
 		type_quot(cmds) == 0 && t == 0)

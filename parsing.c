@@ -6,7 +6,7 @@
 /*   By: kelmouto <kelmouto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 11:33:17 by kelmouto          #+#    #+#             */
-/*   Updated: 2023/06/11 18:47:35 by kelmouto         ###   ########.fr       */
+/*   Updated: 2023/06/12 13:49:41 by kelmouto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,20 +66,14 @@ void	parsing(t_pars *pars, t_exp *data)
 		g_exit_status = 258;
 		return ;
 	}
-	// if (check_error(pars->cmd))
-	// {
-	// 	g_exit_status = 258;
-	// 	return ;
-	// }
+	if (!check_error(pars->cmd))
+	{
+		g_exit_status = 258;
+		return ;
+	}
 	check_symbole(pars);
 	a = ft_split(pars->cmd, '|');
 	a = func_expand(a, data);
-	printf("pars : %s\n",a[0]);
-	printf("pars : %s\n",a[1]);
-
-printf("pars : %s\n",a[2]);
-
-exit(11);
 	pars = NULL;
 	while (*a)
 	{
@@ -92,9 +86,6 @@ exit(11);
 		ft_add_to_pars(&pars, new_pars);
 		a++;
 	}
-	i = 0;
-
-//	exit(11);
 	handl_redirec(pars, data);
 	execution(pars, data);
 }

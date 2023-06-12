@@ -6,7 +6,7 @@
 /*   By: kelmouto <kelmouto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 05:04:22 by ybouzafo          #+#    #+#             */
-/*   Updated: 2023/06/11 16:54:28 by kelmouto         ###   ########.fr       */
+/*   Updated: 2023/06/12 13:48:09 by kelmouto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@
 int					g_exit_status;
 //extern void			rl_replace_line(const char *str, int n);
 
-// une seule globale.
 typedef struct s_pars
 {
 	char			**s;
@@ -78,14 +77,14 @@ int					is_alphanum(char c);
 char				*add_sp(char *s);
 void				check_symbole(t_pars *pars);
 void				supprimer_espaces(char *texte);
-void	should_add_sp(char *s, char **d, int i, int count);
+void				should_add_sp(char *s, char **d, int i, int count);
 /*----------------------------------------herdoc.c-----------------------------------------------*/
 void				create_herdoc(t_pars *pars, char *str, t_exp *data);
 
 /*----------------------------------------my_split.c-----------------------------------------------*/
 size_t				ft_strlen(const char *str);
-char				**ft_split(char  *s, char c);
-int	compter_mots(char const *s, char c);
+char				**ft_split(char *s, char c);
+int					compter_mots(char const *s, char c);
 
 /*----------------------------------------my_libft.c-----------------------------------------------*/
 char				*ft_strchr(const char *string, int r);
@@ -107,17 +106,17 @@ void				print_herdoc(t_pars *pars);
 void				print_pars(t_pars *pars);
 int					check_if_builtin(t_pars *pars, t_exp *data, int x);
 /*----------------------------------------syntax_error.c-----------------------------------------------*/
-int					ft_perror(void);
+int					is_all_space(char *s);
+int					check_pipe(char *s);
 int					check_error(char *str);
-int					check_ozel_char(char *str);
-int					check_redirect(char *str, int index);
-int					check_pipe(char *str, int index);
-int					check_last_char(char *str);
-int					check_double_redirec1(char *str);
-int					check_double_redirec2(char *str);
+void				ft_perror(void);
+/*squipe rah deja kyna mdeclaria
+fl parsing.c bdli dik chek error diri hdaha zhd ! drtha ktreturner 0 la kan error*/
+
 /*----------------------------------------utils.c-----------------------------------------------*/
-char    **fill_string(char const *s, char c, char **strings, int start);
-void     func_free(char **s);
+char				**fill_string(char const *s, char c, char **strings,
+						int start);
+void				func_free(char **s);
 char				**ft_splita(char const *s, char c);
 size_t				ft_strlcpy(char *dst, const char *src, size_t size);
 /*---------------------------------------echo.c-----------------------------------------------*/
@@ -182,7 +181,7 @@ void				perror_exp(void);
 int					is_alph_digit(char c);
 
 /*-------------------------------------env-------------------------------------------------------*/
-t_exp				*my_export(t_pars *pars,char **env);
+t_exp				*my_export(t_pars *pars, char **env);
 char				*copy_value(char *s, int k);
 char				*copy_key(char *s, int k);
 void				min_env_null(t_exp *data, t_exp *new, t_exp *current,
@@ -234,27 +233,26 @@ void				handle_append_output_redirect(t_pars *pars, t_exp *data,
 						int i);
 //int					red_continue(t_pars *pars, t_exp *data, int i);
 /************************************builtins********************************/
-int	exp_builtins(t_pars *pars, t_exp *data);
-int	export_built(t_pars *pars, t_exp *data);
-int	exit_built(t_pars *pars);
-int	pwd_unset(t_pars *pars, t_exp *data, int x);
-int	env_built(t_pars *pars, t_exp *data);
-int	cd_built(t_pars *pars, t_exp *data);
-int	cd_builtin(t_pars *pars, t_exp *data, int x);
+int					exp_builtins(t_pars *pars, t_exp *data);
+int					export_built(t_pars *pars, t_exp *data);
+int					exit_built(t_pars *pars);
+int					pwd_unset(t_pars *pars, t_exp *data, int x);
+int					env_built(t_pars *pars, t_exp *data);
+int					cd_built(t_pars *pars, t_exp *data);
+int					cd_builtin(t_pars *pars, t_exp *data, int x);
 /*---------------------------------expand before split --------------------------------*/
-int	find_redir(char *p, int j);
-char	*expand_str(char *p, t_exp *data);
-int	is_alph_num(char c);
-char	*expand_func(char *s, int *j, t_exp *data);
-char	**func_expand(char **a, t_exp *data);
-int	ft_ls_size(t_exp *p);
-void squipe(char c, char *s, int *i);
-void	add_many_chars(char **s, char *st);
-void 	add_filename(char **s,char *a , int *i);
-int	ft_isspace(char c);
-void	squipe_pro(char *s,char **st,int *i, t_exp *data);
-char	*expand_file(char *a, t_exp *data);
-int check_ambiguous(char *s);
-
+int					find_redir(char *p, int j);
+char				*expand_str(char *p, t_exp *data);
+int					is_alph_num(char c);
+char				*expand_func(char *s, int *j, t_exp *data);
+char				**func_expand(char **a, t_exp *data);
+int					ft_ls_size(t_exp *p);
+void				squipe(char c, char *s, int *i);
+void				add_many_chars(char **s, char *st);
+void				add_filename(char **s, char *a, int *i);
+int					ft_isspace(char c);
+void				squipe_pro(char *s, char **st, int *i, t_exp *data);
+char				*expand_file(char *a, t_exp *data);
+int					check_ambiguous(char *s);
 
 #endif
