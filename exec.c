@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kelmouto <kelmouto@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ybouzafo <ybouzafo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 10:14:55 by ybouzafo          #+#    #+#             */
-/*   Updated: 2023/06/12 16:20:32 by kelmouto         ###   ########.fr       */
+/*   Updated: 2023/06/12 17:59:45 by ybouzafo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ int	check_if_builtin(t_pars *pars, t_exp *data, int x)
 {
 	if (pars->cmds == NULL)
 		return (1);
-	// if (!ft_strcmp(pars->cmds[0], "\"\""))
-	// 	return (0);
 	if (pars->cmds && (strcmp(pars->cmds[0], "echo") == 0))
 	{
 		echo_exec(pars, data);
@@ -181,19 +179,16 @@ void	execution(t_pars *pars, t_exp *data)
 	char	**arr;
 	int		x;
 	int		status;
+	int		check_b;
 
 	x = 0;
 	j = dup(0);
 	i = 0;
 	if (ft_lssize(pars) == 1)
 	{
-		if (check_if_builtin(pars, data, x) == -1)
+		check_b = check_if_builtin(pars, data, x);
+		if (check_b == -1)
 		{
-			if (pipe(fd) == -1)
-			{
-				perror("Pipe failed");
-				return ;
-			}
 			pid = fork();
 			if (pid < 0)
 			{
@@ -252,21 +247,18 @@ void	execution(t_pars *pars, t_exp *data)
 				}
 			}
 		}
-		close(fd[1]);
-		dup2(fd[0], 0);
+		else if (check_b == 1)
+			return ;
 		x++;
-		close(fd[0]);
-		dup2(j, 0);
 		wait(&status);
 		if (WIFEXITED(status))
 		{
 			g_exit_status = WEXITSTATUS(status);
 		}
-		// else if (WIFSIGNALED(status))
-		// {
-		// 	printf("hheello\n");
-		// 	g_exit_status = WTERMSIG(status) + 128;
-		// }
+		else if (WIFSIGNALED(status))
+		{
+			g_exit_status = WTERMSIG(status) + 128;
+		}
 	}
 	else
 		func_multiple_pipe(pars, data);

@@ -6,7 +6,7 @@
 /*   By: ybouzafo <ybouzafo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 20:32:53 by ybouzafo          #+#    #+#             */
-/*   Updated: 2023/06/12 11:50:53 by ybouzafo         ###   ########.fr       */
+/*   Updated: 2023/06/12 17:04:20 by ybouzafo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,6 @@ void	handle_output_redirect(t_pars *pars, t_exp *data, int i)
 		{
 			g_exit_status = 1;
 			perror("minishell : ");
-			// print ambigous redirect
 		}
 	}
 }

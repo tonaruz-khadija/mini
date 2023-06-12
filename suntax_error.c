@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   suntax_error.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kelmouto <kelmouto@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ybouzafo <ybouzafo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 20:54:23 by ybouzafo          #+#    #+#             */
-/*   Updated: 2023/06/12 16:11:24 by kelmouto         ###   ########.fr       */
+/*   Updated: 2023/06/12 18:06:16 by ybouzafo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	squipe(char c, char *s, int *i)
 {
 	*i += 1;
-	while ( s[*i] &&  s[*i] != c)
+	while (s[*i] && s[*i] != c)
 		*i += 1;
 }
 
@@ -90,7 +90,7 @@ int	check_error(char *s)
 			if (s[i] == '>' || s[i] == '<' || s[i] == '|')
 				return (ft_perror());
 		}
-		else if (s[i] == ';' || s[i] == '*')
+		else if (s[i] == ';' || s[i] == '*' || s[i] == ',')
 			return (ft_perror());
 		i++;
 	}

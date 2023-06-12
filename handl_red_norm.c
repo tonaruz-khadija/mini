@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handl_red_norm.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kelmouto <kelmouto@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ybouzafo <ybouzafo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 09:20:40 by ybouzafo          #+#    #+#             */
-/*   Updated: 2023/06/12 16:20:25 by kelmouto         ###   ########.fr       */
+/*   Updated: 2023/06/12 16:58:20 by ybouzafo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,17 @@ void	handle_append_output_redirect(t_pars *pars, t_exp *data, int i)
 
 	s = 0;
 	pars->s[i + 1] = skip_quotes(pars->s[i + 1]);
+	pars->s[i + 1] = expand_file(pars->s[i + 1], data);
 	pars->od = open(pars->s[i + 1], O_CREAT | O_RDWR | O_APPEND, 0777);
 	if (pars->od < 0)
 	{
 		while (data)
 		{
+			if (pars->s[i + 1] == NULL)
+			{
+				s++;
+				break ;
+			}
 			if (handle_output_redirect_conditions(data, pars, s, i))
 			{
 				s++;
@@ -102,8 +108,8 @@ void	handl_redirec(t_pars *pars, t_exp *data)
 			{
 				if (ft_strcmp(pars->s[0], "\"\""))
 					ft_add_cmds(skip_quot_exp(pars->s[i]), &pars->cmds);
-				ft_add_cmds(pars->s[i], &pars->cmds);
-
+				else
+					ft_add_cmds(pars->s[i], &pars->cmds);
 			}
 			i++;
 		}

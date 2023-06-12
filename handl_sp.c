@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handl_sp.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kelmouto <kelmouto@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ybouzafo <ybouzafo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 20:45:16 by ybouzafo          #+#    #+#             */
-/*   Updated: 2023/06/11 16:42:42 by kelmouto         ###   ########.fr       */
+/*   Updated: 2023/06/12 18:41:06 by ybouzafo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,12 @@ void	should_add_sp(char *s, char **d, int i, int count)
 	}
 }
 
-void squipe_toadd(char **at, char *s,char c , int *i)
+void	squipe_toadd(char **at, char *s, char c, int *i)
 {
-	add_char(at,s[(*i)++]);
-	while(s[*i] != c)
-		add_char(at,s[(*i)++]);
-	add_char(at,s[(*i)++]);
+	add_char(at, s[(*i)++]);
+	while (s[*i] != c)
+		add_char(at, s[(*i)++]);
+	add_char(at, s[(*i)++]);
 }
 
 char	*add_sp(char *s)
@@ -51,9 +51,11 @@ char	*add_sp(char *s)
 	d = 0;
 	i = 0;
 	count = 0;
+	if (!ft_strcmp(s, "\"\""))
+		return (s);
 	while (s[i])
 	{
-		if(s[i] == '\'' || s[i] == '"')
+		if (s[i] == '\'' || s[i] == '"')
 			squipe_toadd(&d, s, s[i], &i);
 		should_add_sp(s, &d, i, count);
 		if ((!count || count % 2 == 0) && (d && s[i - 1] != s[i]
@@ -77,29 +79,4 @@ void	check_symbole(t_pars *pars)
 
 	i = 0;
 	pars->cmd = add_sp(pars->cmd);
-}
-
-void	supprimer_espaces(char *s)
-{
-	int		len;
-	bool	in_quotes;
-	int		i;
-	int		j;
-
-	if (!s)
-		return ;
-	len = ft_strlen(s);
-	in_quotes = false;
-	i = 0;
-	j = 0;
-	while (i < len)
-	{
-		if (s[i] == '"' || s[i] == '\'')
-			in_quotes = !in_quotes;
-		if (in_quotes || (s[i] != ' ' || (i > 0 && s[i - 1] != ' ')) || (i == 0
-				&& s[i] == ' '))
-			s[j++] = s[i];
-		i++;
-	}
-	s[j] = '\0';
 }

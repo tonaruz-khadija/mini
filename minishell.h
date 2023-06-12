@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ybouzafo <ybouzafo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kelmouto <kelmouto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 05:04:22 by ybouzafo          #+#    #+#             */
-/*   Updated: 2023/06/12 14:15:43 by ybouzafo         ###   ########.fr       */
+/*   Updated: 2023/06/12 18:51:09 by kelmouto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 # endif
 
 int					g_exit_status;
-//extern void			rl_replace_line(const char *str, int n);
+// extern void			rl_replace_line(const char *str, int n);
 
 // une seule globale.
 typedef struct s_pars

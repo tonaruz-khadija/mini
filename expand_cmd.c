@@ -6,7 +6,7 @@
 /*   By: ybouzafo <ybouzafo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 11:54:21 by kelmouto          #+#    #+#             */
-/*   Updated: 2023/06/12 14:09:35 by ybouzafo         ###   ########.fr       */
+/*   Updated: 2023/06/12 18:28:09 by ybouzafo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,6 @@ char	*expand_func(char *s, int *j, t_exp *data)
 	v = ft_substr(s, start, *j - start);
 	t = expand_str(v, data);
 	(*j)--;
-	if (t == NULL)
-		printf("uskel :  : ambiguous redirect \n");
 	return (t);
 }
 

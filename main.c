@@ -6,7 +6,7 @@
 /*   By: kelmouto <kelmouto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 06:07:56 by ybouzafo          #+#    #+#             */
-/*   Updated: 2023/06/09 15:40:03 by kelmouto         ###   ########.fr       */
+/*   Updated: 2023/06/12 18:51:19 by kelmouto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	main(int ac, char **av, char **env)
 	pars = malloc(sizeof(t_pars));
 	(void)ac;
 	(void)av;
-	data = my_export(pars,env);
+	data = my_export(pars, env);
 	// pars->cmd = NULL;
 	i = 0;
 	while (1)

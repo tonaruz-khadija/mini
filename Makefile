@@ -6,7 +6,7 @@
 #    By: ybouzafo <ybouzafo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/03 05:04:18 by ybouzafo          #+#    #+#              #
-#    Updated: 2023/06/12 11:31:35 by ybouzafo         ###   ########.fr        #
+#    Updated: 2023/06/12 18:05:06 by ybouzafo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	@stty -echoctl
-	$(CC) $(CFLAGS) $(OBJ)  -I ~/Users/ybouzafo/goinfre/brew/Cellar/readline/8.2.1/include  -L /Users/ybouzafo/goinfre/brew/Cellar/readline/8.2.1/lib -lreadline -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJ)  -I ~/Users/ybouzafo/goinfre/homebrew/Cellar/readline/8.2.1/include  -L /Users/ybouzafo/goinfre/homebrew/Cellar/readline/8.2.1/lib -lreadline -o $(NAME)
 clean:
 		$(RM) $(OBJ)
 fclean: clean
