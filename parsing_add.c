@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_add.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ybouzafo <ybouzafo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kelmouto <kelmouto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 11:37:59 by kelmouto          #+#    #+#             */
-/*   Updated: 2023/05/13 21:04:07 by ybouzafo         ###   ########.fr       */
+/*   Updated: 2023/06/13 21:29:26 by kelmouto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,7 @@ void	add_char(char **s, char c)
 	}
 	d[i] = c;
 	d[i + 1] = 0;
+	free(*s);
 	*s = d;
+	
 }

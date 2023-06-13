@@ -6,7 +6,7 @@
 /*   By: kelmouto <kelmouto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 11:44:19 by kelmouto          #+#    #+#             */
-/*   Updated: 2023/06/09 15:18:21 by kelmouto         ###   ########.fr       */
+/*   Updated: 2023/06/13 20:38:48 by kelmouto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,5 +104,6 @@ char	*get_value(t_pars *pars, char *s)
 		v = min_value(s, p);
 	else
 		v = NULL;
+	free(p);
 	return (v);
 }

@@ -6,7 +6,7 @@
 /*   By: kelmouto <kelmouto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 14:18:22 by kelmouto          #+#    #+#             */
-/*   Updated: 2023/06/06 14:25:31 by kelmouto         ###   ########.fr       */
+/*   Updated: 2023/06/13 23:03:18 by kelmouto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	min_env_null(t_exp *data, t_exp *new, t_exp *current, t_exp *tmp)
 	char	buff[1024];
 
 	data->key = ft_strdup("PWD=");
-	data->value = ft_strdup(getcwd(buff, sizeof(buff)));
+	data->value = getcwd(buff, sizeof(buff));
 	new->key = ft_strdup("SHLVL=");
 	new->value = ft_strdup("1");
 	current->key = ft_strdup("_=");

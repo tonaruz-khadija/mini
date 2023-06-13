@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ybouzafo <ybouzafo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kelmouto <kelmouto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 11:54:21 by kelmouto          #+#    #+#             */
-/*   Updated: 2023/06/12 18:28:09 by ybouzafo         ###   ########.fr       */
+/*   Updated: 2023/06/13 21:22:27 by kelmouto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,13 +70,12 @@ char	*expand_func(char *s, int *j, t_exp *data)
 	if (s[*j] == '$')
 		return (ft_strdup(""));
 	if (s[*j] == '?')
-	{
 		return (ft_itoa(g_exit_status));
-	}
 	while (s[*j] && is_alph_num(s[*j]))
 		(*j)++;
 	v = ft_substr(s, start, *j - start);
 	t = expand_str(v, data);
+	free(v);
 	(*j)--;
 	return (t);
 }
@@ -156,6 +155,7 @@ char	**func_expand(char **a, t_exp *data)
 				add_char(&s, a[i][j]);
 			j++;
 		}
+		free(a[i]);
 		a[i] = s;
 		i++;
 	}

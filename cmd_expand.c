@@ -6,7 +6,7 @@
 /*   By: kelmouto <kelmouto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 11:50:22 by kelmouto          #+#    #+#             */
-/*   Updated: 2023/06/10 14:43:07 by kelmouto         ###   ########.fr       */
+/*   Updated: 2023/06/13 21:27:01 by kelmouto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,14 @@ char	*expand_str(char *p, t_exp *data)
 	tmp = data;
 	while (data)
 	{
-		if (!ft_strcmp(trim_egal(data->key), p))
-		{
-			if (data->value)
-				s = ft_strdup(data->value);
-			else
-				s = NULL;
-		}
+		s = trim_egal(data->key);
+		if (!ft_strcmp(s, p))
+			return(free(s), data->value);
+		else
+			free(s);
 		data = data->next;
 	}
-	return (s);
+	return (NULL);
 }
 
 // char	*str_join1(char *v, char *f, char *p)

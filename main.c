@@ -6,7 +6,7 @@
 /*   By: kelmouto <kelmouto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 06:07:56 by ybouzafo          #+#    #+#             */
-/*   Updated: 2023/06/13 13:12:50 by kelmouto         ###   ########.fr       */
+/*   Updated: 2023/06/13 23:11:05 by kelmouto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,32 +25,25 @@
 
 int	main(int ac, char **av, char **env)
 {
-	t_pars	*pars;
+	char *s;
 	t_exp	*data;
 	int		i;
 
 	//signal(SIGINT, handl_c);
-	pars = malloc(sizeof(t_pars));
 	(void)ac;
 	(void)av;
-	data = my_export(pars, env);
-	// pars->cmd = NULL;
+	data = my_export(env);
 	i = 0;
 	while (1)
 	{
-		// free(pars->cmd);
-		pars->cmd = readline("Us~Kel> ");
-		//printf("---->%s\n", pars->cmd);
-		if (pars->cmd && !pars->cmd[0])
+		s = readline("Us~Kel> ");
+		if (s && !s[0])
 			continue ;
-		if (pars->cmd == NULL)
-			exit(1);
-		if (ft_strlen(pars->cmd) != 0)
-		{
-			add_history(pars->cmd);
-		}
-		parsing(pars, data);
+		if( !s)
+			break;
+		add_history(s);
+		parsing(s, data);
+		//system("leaks minishell");
 	}
-	printf("\n");
 	return (0);
 }

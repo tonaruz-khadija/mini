@@ -6,7 +6,7 @@
 /*   By: kelmouto <kelmouto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 11:33:17 by kelmouto          #+#    #+#             */
-/*   Updated: 2023/06/13 14:20:10 by kelmouto         ###   ########.fr       */
+/*   Updated: 2023/06/13 23:18:49 by kelmouto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,49 +47,44 @@ char	*expand_file(char *a, t_exp *data)
 		i++;
 	}
 	if (compter_mots(s, ' ') > 1 || !s)
-		return (NULL);
-	return (s);
+		return (free(a), NULL);
+	return (free(a), s);
 }
 
-void	parsing(t_pars *pars, t_exp *data)
+void	ft_freee(t_pars *pars)
+{
+	while(pars)
+	{
+		func_free(pars->s);
+		pars = pars->next;
+	}
+}
+
+void	parsing(char *s, t_exp *data)
 {
 	char	**a;
-	t_pars	*new_pars;
-	char	**split;
+	t_pars	*pars;
 	int		i;
-	int		t;
 
-	t = 0;
 	i = 0;
-	if (pars->cmd == NULL || pars->cmd[0] == '\0')
-		return ;
-	if (nmbr_quotes(pars->cmd) == 1)
+	if (nmbr_quotes(s) == 1)
 	{
 		printf("Syntax error : (close the quotes) \n");
 		g_exit_status = 258;
 		return ;
 	}
-	if (!check_error(pars->cmd))
+	if (!check_error(s))
 	{
 		g_exit_status = 258;
 		return ;
 	}
-	check_symbole(pars);
-	printf("string:%s\n", pars->cmd);
-	a = ft_split(pars->cmd, '|');
+	a = ft_split(add_sp(s), '|');
 	a = func_expand(a, data);
 	pars = NULL;
-	while (*a)
-	{
-		new_pars = malloc(sizeof(t_pars));
-		if (!new_pars)
-			exit(1);
-		new_pars->next = NULL;
-		split = ft_split(*a, ' ');
-		new_pars->s = split;
-		ft_add_to_pars(&pars, new_pars);
-		a++;
-	}
+	while (a[i])
+		ft_add_to_pars(&pars, lstnew(ft_split(a[i++], ' ')));
+	free(a);
 	handl_redirec(pars, data);
 	execution(pars, data);
+	ft_freee(pars);
 }

@@ -6,7 +6,7 @@
 /*   By: kelmouto <kelmouto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 20:48:45 by ybouzafo          #+#    #+#             */
-/*   Updated: 2023/05/20 11:01:13 by kelmouto         ###   ########.fr       */
+/*   Updated: 2023/06/13 23:13:20 by kelmouto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,6 @@ void	print_herdoc(t_pars *pars)
 	while (pars)
 	{
 		printf("--->%s\n", pars->herdoc);
-		pars = pars->next;
-	}
-}
-void	print_pars(t_pars *pars)
-{
-	while (pars)
-	{
-		printf("--->%s\n", pars->cmd);
 		pars = pars->next;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: kelmouto <kelmouto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 16:08:22 by kelmouto          #+#    #+#             */
-/*   Updated: 2023/06/10 16:37:06 by kelmouto         ###   ########.fr       */
+/*   Updated: 2023/06/13 20:40:08 by kelmouto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ void	min_get_exp(t_exp *tmp, t_pars *pars, char *ptr)
 		}
 		else
 			tmp->value = ft_strdup(v);
+		free(s);
+		free(v);
 		return ;
 	}
 }

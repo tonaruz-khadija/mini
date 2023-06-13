@@ -6,7 +6,7 @@
 /*   By: kelmouto <kelmouto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 20:43:14 by ybouzafo          #+#    #+#             */
-/*   Updated: 2023/06/10 09:51:06 by kelmouto         ###   ########.fr       */
+/*   Updated: 2023/06/13 20:35:32 by kelmouto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,27 +120,6 @@ char	*ft_expand(char *str, t_exp *data)
 	return (str);
 }
 
-// char	*expand(char *str, t_exp *data)
-// {
-// 	int		i;
-// 	char	*compare_dol;
-// 	char	*bha;
-
-// 	i = 0;
-// 	while (str[i])
-// 	{
-// 		if (str[i] == '$')
-// 		{
-// 			compare_dol = check_env(str);
-// 			bha = egal_egal(data, compare_dol);
-// 			return (bha);
-// 		}
-// 		i++;
-// 	}
-// 	return (str);
-// }
-
-
 char	*expand(char *str, t_exp *data)
 {
 	int		i;
@@ -152,7 +131,6 @@ char	*expand(char *str, t_exp *data)
 	{
 		if (str[i] == '$')
 		{
-			printf("yyyyeh\n");
 			compare_dol = check_env(str);
 			bha = egal_egal(data, compare_dol);
 			return (bha);

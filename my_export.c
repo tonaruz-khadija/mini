@@ -6,7 +6,7 @@
 /*   By: kelmouto <kelmouto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 11:29:37 by kelmouto          #+#    #+#             */
-/*   Updated: 2023/06/09 15:43:00 by kelmouto         ###   ########.fr       */
+/*   Updated: 2023/06/13 21:34:38 by kelmouto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,12 @@ t_exp	*init(t_exp *data)
 	return (data);
 }
 
-t_exp	*my_export(t_pars *pars,char **env)
+t_exp	*my_export(char **env)
 {
 	int		i;
 	int		k;
 	t_exp	*data;
 	t_exp	*new_data;
-	(void)pars;
 	data = NULL;
 	new_data = NULL;
 	i = 0;

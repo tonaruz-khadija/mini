@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   my_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ybouzafo <ybouzafo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kelmouto <kelmouto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 22:19:00 by kelmouto          #+#    #+#             */
-/*   Updated: 2023/06/12 12:57:31 by ybouzafo         ###   ########.fr       */
+/*   Updated: 2023/06/13 23:08:32 by kelmouto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,15 +42,16 @@ void	func_free(char **s)
 	int	i;
 
 	i = 0;
-	while (s[i])
+	while (s && s[i])
 	{
 		free(s[i]);
 		i++;
 	}
-	free(s);
+	if(s)
+		free(s);
 }
 
-char	**fill_string(char const *s, char c, char **strings, int start)
+char	**fill_string(char *s, char c, char **strings, int start)
 {
 	int	j;
 	int	i;
@@ -75,7 +76,7 @@ char	**fill_string(char const *s, char c, char **strings, int start)
 		}
 	}
 	strings[j] = NULL;
-	return (strings);
+	return (free(s), strings);
 }
 
 char	**ft_split(char *s, char c)

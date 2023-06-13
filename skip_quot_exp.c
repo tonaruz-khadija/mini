@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   skip_quot_exp.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ybouzafo <ybouzafo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kelmouto <kelmouto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 13:41:30 by kelmouto          #+#    #+#             */
-/*   Updated: 2023/06/12 11:34:53 by ybouzafo         ###   ########.fr       */
+/*   Updated: 2023/06/13 22:40:52 by kelmouto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,8 @@ char	*skip_quot_exp(char *s)
 		return (NULL);
 	while (s[i])
 	{
-		if (s[i] == '\'')
-			str = min_skip(s, &i, s[i], str);
-		if (s[i] == '"')
-			str = min_skip(s, &i, s[i], str);
+		if (s[i] == '\'' || s[i] == '"')
+		 	str = ft_strjoina(str, trim_quotes(s, &i, s[i]));
 		else
 			add_char(&str, s[i]);
 		if (s[i])

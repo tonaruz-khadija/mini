@@ -6,7 +6,7 @@
 /*   By: kelmouto <kelmouto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 05:04:22 by ybouzafo          #+#    #+#             */
-/*   Updated: 2023/06/13 14:36:00 by kelmouto         ###   ########.fr       */
+/*   Updated: 2023/06/13 22:59:45 by kelmouto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ typedef struct s_pars
 	char			**s;
 	char			*dr;
 	char			*herdoc;
-	char			*cmd;
 	char			*dupcmd;
 	char			**envr;
 	int				id;
@@ -94,7 +93,8 @@ char				*ft_substr(char const *s, unsigned int start, size_t len);
 char				*extr_path(char **env);
 void				add_char(char **s, char c);
 /*----------------------------------------parsing.c-----------------------------------------------*/
-void				parsing(t_pars *pars, t_exp *data);
+void				parsing(char *s, t_exp *data);
+t_pars				*lstnew(char **s);
 void				ft_add_to_pars(t_pars **a, t_pars *new);
 //void				min_parsing(t_pars *pars);
 /*----------------------------------------print.c-----------------------------------------------*/
@@ -109,10 +109,10 @@ int					check_pipe(char *s);
 int					check_error(char *str);
 int					ft_perror(void);
 /*----------------------------------------utils.c-----------------------------------------------*/
-char				**fill_string(char const *s, char c, char **strings,
+char				**fill_string(char *s, char c, char **strings,
 						int start);
 void				func_free(char **s);
-char				**ft_splita(char const *s, char c);
+char				**ft_splita(char  *s, char c);
 size_t				ft_strlcpy(char *dst, const char *src, size_t size);
 /*---------------------------------------echo.c-----------------------------------------------*/
 void				ft_echo(char **cmds, t_exp *data);
@@ -172,7 +172,7 @@ int					err_exp(char *s);
 void				perror_exp(void);
 int					is_alph_digit(char c);
 /*-------------------------------------env-------------------------------------------------------*/
-t_exp				*my_export(t_pars *pars, char **env);
+t_exp				*my_export(char **env);
 char				*copy_value(char *s, int k);
 char				*copy_key(char *s, int k);
 void				min_env_null(t_exp *data, t_exp *new, t_exp *current,

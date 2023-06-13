@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ybouzafo <ybouzafo@student.42.fr>          +#+  +:+       +#+         #
+#    By: kelmouto <kelmouto@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/03 05:04:18 by ybouzafo          #+#    #+#              #
-#    Updated: 2023/06/12 18:05:06 by ybouzafo         ###   ########.fr        #
+#    Updated: 2023/06/13 22:53:21 by kelmouto         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME=minishell
 CC=cc
-CFLAGS=-Wall -Wextra -Werror -fsanitize=address -g3
+CFLAGS=-Wall -Wextra -Werror #-fsanitize=address -g3
 
 RM=rm -f
 SRC = ft_putendl.c cd_rep.c echo.c pwd.c expan.c handl_redir.c handl_sp.c herdoc.c suntax_error.c main.c  utils.c aide.c \

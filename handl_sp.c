@@ -6,7 +6,7 @@
 /*   By: kelmouto <kelmouto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 20:45:16 by ybouzafo          #+#    #+#             */
-/*   Updated: 2023/06/13 14:08:17 by kelmouto         ###   ########.fr       */
+/*   Updated: 2023/06/13 23:12:47 by kelmouto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,6 @@ char	*add_sp(char *s)
 			add_char(&d, ' ');
 		add_char(&d, s[i++]);
 	}
-	return (d);
+	return (free(s), d);
 }
 
-void	check_symbole(t_pars *pars)
-{
-	int	i;
-
-	i = 0;
-	pars->cmd = add_sp(pars->cmd);
-}
