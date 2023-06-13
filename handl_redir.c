@@ -3,24 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   handl_redir.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ybouzafo <ybouzafo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kelmouto <kelmouto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 20:32:53 by ybouzafo          #+#    #+#             */
-/*   Updated: 2023/06/13 10:54:13 by ybouzafo         ###   ########.fr       */
+/*   Updated: 2023/06/13 14:26:53 by kelmouto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int	check_ambiguous(char *s)
-{
-	if (compter_mots(s, ' ') > 1)
-	{
-		printf("uskel : ambiguous redirect \n");
-		return (1);
-	}
-	return (0);
-}
 
 void	ft_add_cmds(char *s, char ***cmds)
 {

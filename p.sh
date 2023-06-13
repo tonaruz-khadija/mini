@@ -1,0 +1,1 @@
+make fclean && git add . && git commit -m "$USER _push" && git push 

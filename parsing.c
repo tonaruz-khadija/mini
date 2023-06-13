@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ybouzafo <ybouzafo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kelmouto <kelmouto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 11:33:17 by kelmouto          #+#    #+#             */
-/*   Updated: 2023/06/13 10:49:59 by ybouzafo         ###   ########.fr       */
+/*   Updated: 2023/06/13 14:20:10 by kelmouto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ char	*expand_file(char *a, t_exp *data)
 			add_char(&s, a[i]);
 		i++;
 	}
-	if (compter_mots(s, ' ') > 1)
+	if (compter_mots(s, ' ') > 1 || !s)
 		return (NULL);
 	return (s);
 }
@@ -75,6 +75,7 @@ void	parsing(t_pars *pars, t_exp *data)
 		return ;
 	}
 	check_symbole(pars);
+	printf("string:%s\n", pars->cmd);
 	a = ft_split(pars->cmd, '|');
 	a = func_expand(a, data);
 	pars = NULL;

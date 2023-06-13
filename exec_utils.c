@@ -6,7 +6,7 @@
 /*   By: kelmouto <kelmouto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 18:55:42 by kelmouto          #+#    #+#             */
-/*   Updated: 2023/06/09 18:06:21 by kelmouto         ###   ########.fr       */
+/*   Updated: 2023/06/13 14:38:55 by kelmouto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,14 @@ int	ft_access(char **ptr, t_pars *pars, t_exp *data, char **arr)
 		
 		if (access(ptr[i], 0) == 0)
 		{
+			
 			return (execve(ptr[i], pars->cmds, arr));
 		}
 		i++;
 	}
-	write(2, "command not found\n", 18);
+	ft_putstr_fd("Us~kel: ", 2);
+	ft_putstr_fd(pars->cmds[0], 2);
+	ft_putendl_fd(" :command not found", 2);
 	exit(127);
 }
 

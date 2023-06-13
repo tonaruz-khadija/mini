@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ybouzafo <ybouzafo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kelmouto <kelmouto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 05:04:22 by ybouzafo          #+#    #+#             */
-/*   Updated: 2023/06/13 09:34:35 by ybouzafo         ###   ########.fr       */
+/*   Updated: 2023/06/13 14:36:00 by kelmouto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 # endif
 
 int					g_exit_status;
-extern void			rl_replace_line(const char *str, int n);
+// extern void			rl_replace_line(const char *str, int n);
 
 // une seule globale.
 typedef struct s_pars
@@ -78,16 +78,12 @@ void				handl_redirec(t_pars *pars, t_exp *data);
 int					is_alphanum(char c);
 char				*add_sp(char *s);
 void				check_symbole(t_pars *pars);
-void				supprimer_espaces(char *texte);
-void				should_add_sp(char *s, char **d, int i, int count);
 /*----------------------------------------herdoc.c-----------------------------------------------*/
 int					create_herdoc(t_pars *pars, char *str, t_exp *data);
-
 /*----------------------------------------my_split.c-----------------------------------------------*/
 size_t				ft_strlen(const char *str);
 char				**ft_split(char *s, char c);
 int					compter_mots(char const *s, char c);
-
 /*----------------------------------------my_libft.c-----------------------------------------------*/
 char				*ft_strchr(const char *string, int r);
 char				*ft_strjoin(char *s1, char *s2);
@@ -107,7 +103,6 @@ void				print_noeud(t_pars *pars);
 void				print_herdoc(t_pars *pars);
 void				print_pars(t_pars *pars);
 int					check_if_builtin(t_pars *pars, t_exp *data, int x);
-
 /*----------------------------------------syntax_error.c-----------------------------------------------*/
 int					is_all_space(char *s);
 int					check_pipe(char *s);
@@ -121,8 +116,6 @@ char				**ft_splita(char const *s, char c);
 size_t				ft_strlcpy(char *dst, const char *src, size_t size);
 /*---------------------------------------echo.c-----------------------------------------------*/
 void				ft_echo(char **cmds, t_exp *data);
-// int					type_quot(char *str);
-// char				*skip_quotes(char *str);
 char				*skip_double(char *str);
 char				*skip_single(char *str);
 int					type_quot(char *str);
@@ -136,14 +129,13 @@ void				extr_pwd(t_exp *data);
 void				pwd_env(t_pars *pars, t_exp *data);
 /*---------------------------------------cd_rep.c-----------------------------------------------*/
 
-// void				cd_rep(t_pars *pars, char **env);
 int					cd_repa(t_pars *pars, t_exp *data);
 void				mod_envr(t_exp *data, char *str);
 int					cd_repa_dort(char *str, t_exp *data, int t);
 int					cd_repa_iki(char *str, t_exp *data, int t);
 int					cd_continu(t_exp *data, char *str, int t);
 void				path_absolu(t_exp *data, char *str);
-void				change_envir(t_exp *data);
+void				change_envir(t_exp *data);//7ydi hdchi
 void				mod_point(t_exp *data);
 void				change_pwd(char *str, t_exp *data);
 
@@ -179,7 +171,6 @@ int					check_er_syntax(char *s);
 int					err_exp(char *s);
 void				perror_exp(void);
 int					is_alph_digit(char c);
-
 /*-------------------------------------env-------------------------------------------------------*/
 t_exp				*my_export(t_pars *pars, char **env);
 char				*copy_value(char *s, int k);
@@ -231,7 +222,6 @@ void				handle_redirect_input(t_pars *pars);
 void				handle_heredoc(t_pars *pars, t_exp *data, int i);
 void				handle_append_output_redirect(t_pars *pars, t_exp *data,
 						int i);
-//int					red_continue(t_pars *pars, t_exp *data, int i);
 /************************************builtins********************************/
 int					exp_builtins(t_pars *pars, t_exp *data);
 int					export_built(t_pars *pars, t_exp *data);
@@ -253,7 +243,6 @@ void				add_filename(char **s, char *a, int *i);
 int					ft_isspace(char c);
 void				squipe_pro(char *s, char **st, int *i, t_exp *data);
 char				*expand_file(char *a, t_exp *data);
-int					check_ambiguous(char *s);
 char				*ft_itoa(int n);
-
+void	ft_putstr_fd(char *s, int fd);
 #endif

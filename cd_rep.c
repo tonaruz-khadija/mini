@@ -6,7 +6,7 @@
 /*   By: ybouzafo <ybouzafo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 19:24:42 by ybouzafo          #+#    #+#             */
-/*   Updated: 2023/06/12 11:42:54 by ybouzafo         ###   ########.fr       */
+/*   Updated: 2023/06/13 13:36:07 by ybouzafo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,16 @@
 
 void	has_fonction(char *str, char *ptr, t_exp *data)
 {
+	char	buffer[PATH_MAX];
+	char	*st;
+
+	st = strdup(getcwd(buffer, sizeof(buffer)));
 	while (data)
 	{
 		if (strcmp(data->key, ptr) == 0)
 			data->value = str;
+		if (strcmp(data->key, "PWD=") == 0)
+			data->value = st;
 		data = data->next;
 	}
 }
@@ -46,13 +52,13 @@ int	cd_repa(t_pars *pars, t_exp *data)
 					perror("chdir");
 					return (0);
 				}
+				has_fonction(str, "OLDPWD=", data);
 			}
 			else
 			{
 				cd_dash(data);
 				return (1);
 			}
-			has_fonction(str, "OLDPWD=", data);
 		}
 	}
 	return (1);

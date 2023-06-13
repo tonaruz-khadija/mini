@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handl_sp.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ybouzafo <ybouzafo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kelmouto <kelmouto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 20:45:16 by ybouzafo          #+#    #+#             */
-/*   Updated: 2023/06/13 08:39:29 by ybouzafo         ###   ########.fr       */
+/*   Updated: 2023/06/13 14:08:17 by kelmouto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,22 +20,10 @@ int	is_alphanum(char c)
 	return (0);
 }
 
-void	should_add_sp(char *s, char **d, int i, int count)
-{
-	if ((!count || count % 2 == 0) && i && s[i - 1] != ' ' && s[i - 1] != s[i]
-		&& (s[i] == '<' || s[i] == '>'))
-	{
-		add_char(d, ' ');
-	}
-	if ((!count || count % 2 == 0) && i && s[i - 1] != ' ' && s[i - 1] != s[i]
-		&& (s[i] == '|' || s[i - 1] == '|'))
-	{
-		add_char(d, ' ');
-	}
-}
-
 void	squipe_toadd(char **at, char *s, char c, int *i)
 {
+	if ((*at) && ((*at)[ft_strlen((*at)) - 1] == '>' || (*at)[ft_strlen((*at)) - 1] == '<') && s[*i] != (*at)[ft_strlen((*at)) - 1] && s[*i] != ' ')
+		add_char(at, ' ');
 	add_char(at, s[(*i)++]);
 	while (s[*i] != c)
 		add_char(at, s[(*i)++]);
@@ -51,26 +39,17 @@ char	*add_sp(char *s)
 	d = 0;
 	i = 0;
 	count = 0;
-	if (!ft_strcmp(s, "\"\"") || !ft_strcmp(s, "\"\\\""))
-		return (s);
-	// "djj"
-	//"ls"
+	// if (!ft_strcmp(s, "\"\"") || !ft_strcmp(s, "\"\\\""))
+	// 	return (s);
 	while (s[i])
 	{
 		if (s[i] == '\'' || s[i] == '"')
 			squipe_toadd(&d, s, s[i], &i);
-		should_add_sp(s, &d, i, count);
-		if ((!count || count % 2 == 0) && (d && s[i - 1] != s[i]
-				&& (d[ft_strlen(d) - 1] == '<' || d[ft_strlen(d) - 1] == '>'))
-			&& s[i] != ' ')
+		if ((s[i] == '<' || s[i] == '>') && d && d[ft_strlen(d) - 1] != s[i] && d[ft_strlen(d) - 1] != ' ')
 			add_char(&d, ' ');
-		if ((!count || count % 2 == 0) && (d && s[i - 1] != s[i]
-				&& (d[ft_strlen(d) - 1] == '|' || d[ft_strlen(d) - 1] == '|'))
-			&& s[i] != ' ')
+		else if (d && (d[ft_strlen(d) - 1] == '>' || d[ft_strlen(d) - 1] == '<') && s[i] != d[ft_strlen(d) - 1] && s[i] != ' ')
 			add_char(&d, ' ');
-		else
-			add_char(&d, s[i]);
-		i++;
+		add_char(&d, s[i++]);
 	}
 	return (d);
 }
