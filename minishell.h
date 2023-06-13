@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kelmouto <kelmouto@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ybouzafo <ybouzafo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 05:04:22 by ybouzafo          #+#    #+#             */
-/*   Updated: 2023/06/12 18:51:09 by kelmouto         ###   ########.fr       */
+/*   Updated: 2023/06/13 09:34:35 by ybouzafo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 # endif
 
 int					g_exit_status;
-// extern void			rl_replace_line(const char *str, int n);
+extern void			rl_replace_line(const char *str, int n);
 
 // une seule globale.
 typedef struct s_pars
@@ -81,7 +81,7 @@ void				check_symbole(t_pars *pars);
 void				supprimer_espaces(char *texte);
 void				should_add_sp(char *s, char **d, int i, int count);
 /*----------------------------------------herdoc.c-----------------------------------------------*/
-void				create_herdoc(t_pars *pars, char *str, t_exp *data);
+int					create_herdoc(t_pars *pars, char *str, t_exp *data);
 
 /*----------------------------------------my_split.c-----------------------------------------------*/
 size_t				ft_strlen(const char *str);

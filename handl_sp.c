@@ -6,7 +6,7 @@
 /*   By: ybouzafo <ybouzafo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 20:45:16 by ybouzafo          #+#    #+#             */
-/*   Updated: 2023/06/12 18:41:06 by ybouzafo         ###   ########.fr       */
+/*   Updated: 2023/06/13 08:39:29 by ybouzafo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,10 @@ char	*add_sp(char *s)
 	d = 0;
 	i = 0;
 	count = 0;
-	if (!ft_strcmp(s, "\"\""))
+	if (!ft_strcmp(s, "\"\"") || !ft_strcmp(s, "\"\\\""))
 		return (s);
+	// "djj"
+	//"ls"
 	while (s[i])
 	{
 		if (s[i] == '\'' || s[i] == '"')

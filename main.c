@@ -3,25 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kelmouto <kelmouto@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ybouzafo <ybouzafo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 06:07:56 by ybouzafo          #+#    #+#             */
-/*   Updated: 2023/06/12 18:51:19 by kelmouto         ###   ########.fr       */
+/*   Updated: 2023/06/12 18:08:35 by ybouzafo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include <string.h>
 
-// void	handl_c(int c)
-// {
-// 	(void)c;
-// 	g_exit_status = 1;
-// 	write(1, "\n", 1);
-// 	rl_on_new_line();
-// 	rl_replace_line("", 0);
-// 	rl_redisplay();
-// }
+void	handl_c(int c)
+{
+	(void)c;
+	g_exit_status = 1;
+	write(1, "\n", 1);
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	rl_redisplay();
+}
 
 int	main(int ac, char **av, char **env)
 {
@@ -29,7 +29,7 @@ int	main(int ac, char **av, char **env)
 	t_exp	*data;
 	int		i;
 
-	//signal(SIGINT, handl_c);
+	signal(SIGINT, handl_c);
 	pars = malloc(sizeof(t_pars));
 	(void)ac;
 	(void)av;

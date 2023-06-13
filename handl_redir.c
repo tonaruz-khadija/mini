@@ -6,7 +6,7 @@
 /*   By: ybouzafo <ybouzafo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 20:32:53 by ybouzafo          #+#    #+#             */
-/*   Updated: 2023/06/12 17:04:20 by ybouzafo         ###   ########.fr       */
+/*   Updated: 2023/06/13 10:54:13 by ybouzafo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,24 +96,21 @@ void	handle_output_redirect(t_pars *pars, t_exp *data, int i)
 	pars->od = open(pars->s[i + 1], O_CREAT | O_RDWR | O_TRUNC, 0777);
 	if (pars->od < 0)
 	{
+		g_exit_status = 1;
 		while (data)
 		{
 			if (pars->s[i + 1] == NULL)
 			{
 				s++;
+				printf("us~kel : ambiguous redirect \n");
 				break ;
 			}
 			if (handle_output_redirect_conditions(data, pars, s, i))
-			{
 				s++;
-			}
 			data = data->next;
 		}
 		if (s == 0)
-		{
-			g_exit_status = 1;
-			perror("minishell : ");
-		}
+			perror("us~kel : ");
 	}
 }
 

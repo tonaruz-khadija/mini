@@ -6,7 +6,7 @@
 /*   By: ybouzafo <ybouzafo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 11:33:17 by kelmouto          #+#    #+#             */
-/*   Updated: 2023/06/12 18:38:57 by ybouzafo         ###   ########.fr       */
+/*   Updated: 2023/06/13 10:49:59 by ybouzafo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,7 @@ char	*expand_file(char *a, t_exp *data)
 		i++;
 	}
 	if (compter_mots(s, ' ') > 1)
-	{
-		printf("uskel : ambiguous redirect \n");
 		return (NULL);
-	}
 	return (s);
 }
 

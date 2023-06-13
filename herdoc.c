@@ -6,7 +6,7 @@
 /*   By: ybouzafo <ybouzafo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 20:34:52 by ybouzafo          #+#    #+#             */
-/*   Updated: 2023/06/12 11:56:32 by ybouzafo         ###   ########.fr       */
+/*   Updated: 2023/06/13 10:32:54 by ybouzafo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,23 +17,24 @@ void	sig(int n)
 	write(1, "\n", 1);
 	exit(1);
 }
-void	create_herdoc(t_pars *pars, char *str, t_exp *data)
+int	create_herdoc(t_pars *pars, char *str, t_exp *data)
 {
 	char	*ptr;
 	int		i;
 	int		k;
 	int		status;
+	int		pid;
 
 	k = 0;
 	i = 0;
-	g_exit_status = 0;
 	signal(SIGINT, SIG_IGN);
 	if (pipe(pars->herdoc_fd) == -1)
 	{
 		perror("pipe");
-		return ;
+		return (1);
 	}
-	if (fork() == 0)
+	pid = fork();
+	if (pid == 0)
 	{
 		signal(SIGINT, sig);
 		while (1)
@@ -56,12 +57,16 @@ void	create_herdoc(t_pars *pars, char *str, t_exp *data)
 	}
 	else
 	{
-		wait(&status);
+		close(pars->herdoc_fd[1]);
+		waitpid(pid, &status, 0);
 		if (WIFEXITED(status))
 		{
 			g_exit_status = WEXITSTATUS(status);
+			if (g_exit_status == 1)
+			{
+				return (1);
+			}
 		}
-		close(pars->herdoc_fd[1]);
 	}
+	return (0);
 }
-// plusieur herdoc ve signals.

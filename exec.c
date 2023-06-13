@@ -6,7 +6,7 @@
 /*   By: ybouzafo <ybouzafo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 10:14:55 by ybouzafo          #+#    #+#             */
-/*   Updated: 2023/06/12 17:59:45 by ybouzafo         ###   ########.fr       */
+/*   Updated: 2023/06/13 10:29:30 by ybouzafo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -222,6 +222,10 @@ void	execution(t_pars *pars, t_exp *data)
 				{
 					close(fd[1]);
 					close(fd[0]);
+					exit(1);
+				}
+				if (pars->herdoc_fd[1] == -2)
+				{
 					exit(1);
 				}
 				if (pars->herdoc_fd[1] != -1)
